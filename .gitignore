@@ -3,3 +3,15 @@
 ################################################################################
 
 /.vs/ModernETH
+/.vs/seekersOfTalent/v16
+/.vs/seekersOfTalent/config
+/SeekersOfTalent.Api/bin/Debug/netcoreapp2.2
+/SeekersOfTalent.Api/obj/Debug/netcoreapp2.2
+/SeekersOfTalent.Api/obj
+/SeekersOfTalent.Data/bin/Debug/netcoreapp2.2
+/SeekersOfTalent.Data/obj
+/SeekersOfTalent.Domain/bin/Debug/netcoreapp2.2
+/SeekersOfTalent.Domain/obj
+/SeekersOfTalent.Test/bin/Debug/netcoreapp2.1
+/SeekersOfTalent.Test/obj/Debug/netcoreapp2.1
+/SeekersOfTalent.Test/obj
