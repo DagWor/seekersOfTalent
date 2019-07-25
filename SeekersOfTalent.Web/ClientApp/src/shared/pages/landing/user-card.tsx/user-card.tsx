@@ -79,7 +79,7 @@ export default function UserCard() {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Button color='primary' href='/view-profile'>
+        <Button color='primary' href='/build-profile'>
           View
         </Button>
         <IconButton color='primary' aria-label="Share">

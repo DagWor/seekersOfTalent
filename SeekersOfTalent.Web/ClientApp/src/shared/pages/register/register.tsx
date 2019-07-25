@@ -101,12 +101,6 @@ export default function SignUp() {
                         autoComplete="current-password"
                     />
                     </Grid>
-                    <Grid item xs={12}>
-                    <FormControlLabel
-                        control={<Checkbox value="allowExtraEmails" color="primary" />}
-                        label="I want to receive inspiration, marketing promotions and updates via email."
-                    />
-                    </Grid>
                 </Grid>
                 <Button
                     type="submit"
@@ -114,6 +108,7 @@ export default function SignUp() {
                     variant="contained"
                     color="primary"
                     className={classes.submit}
+                    href='/build-profile'
                 >
                     Sign Up
                 </Button>
