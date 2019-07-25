@@ -12,15 +12,14 @@ import Menu from '@material-ui/core/Menu';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
+import Button from '@material-ui/core/Button'
 import MoreIcon from '@material-ui/icons/MoreVert';
 import LandingPage from '../shared/pages/landing/landing'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     grow: {
-      flexGrow: 0,
+      flexGrow: 1,
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -118,10 +117,10 @@ export default function NavBar() {
       onClose={handleMenuClose}
     >
     <MenuItem onClick={handleMenuClose}>
-    <a href='#'>My Profile</a>
+    <Button href='/view-profile'>My Profile</Button>
     </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-      <a href='/register'>Logout</a>
+      <Button fullWidth={true} href='/register'>Logout</Button>
       </MenuItem>
     </Menu>
   );
@@ -146,7 +145,7 @@ export default function NavBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="relative">
+      <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
       Seek And You Shall Find

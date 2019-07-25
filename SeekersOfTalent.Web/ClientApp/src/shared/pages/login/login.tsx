@@ -82,7 +82,7 @@ export default function Login() {
                 label="Remember me"
             />
             <Button
-                href="../landing/landing"
+                href="../view-profile"
                 type="submit"
                 fullWidth
                 variant="contained"
