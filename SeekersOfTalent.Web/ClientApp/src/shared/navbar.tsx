@@ -15,11 +15,12 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import LandingPage from '../shared/pages/landing/landing'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     grow: {
-      flexGrow: 1,
+      flexGrow: 0,
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -145,10 +146,10 @@ export default function NavBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="relative">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            Seek And You Shall Find
+      Seek And You Shall Find
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
