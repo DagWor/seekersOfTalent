@@ -17,3 +17,5 @@
 /SeekersOfTalent.Test/obj
 /SeekersOfTalent.Types/bin/Debug/netcoreapp2.2
 /SeekersOfTalent.Types/obj
+/.vs/seekersOfTalent/DesignTimeBuild
+/SeekersOfTalent.Data/Scafold.txt
