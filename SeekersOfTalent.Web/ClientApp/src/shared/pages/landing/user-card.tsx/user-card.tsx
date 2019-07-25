@@ -16,6 +16,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import profile from './profile.png'
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,11 +52,11 @@ export default function UserCard() {
   }
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} >
       <CardHeader
         avatar={
           <Avatar aria-label="Recipe" className={classes.avatar}>
-            R
+            D
           </Avatar>
         }
         action={
@@ -78,13 +79,14 @@ export default function UserCard() {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="Add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="Share">
+        <Button color='primary' href='/view-profile'>
+          View
+        </Button>
+        <IconButton color='primary' aria-label="Share">
           <ShareIcon />
         </IconButton>
         <IconButton
+        color='primary'
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
           })}

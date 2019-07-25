@@ -147,8 +147,8 @@ export default function NavBar() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-      Seek And You Shall Find
+          <Typography className={classes.title} variant="h4" noWrap>
+            TalentFair
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
