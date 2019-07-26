@@ -11,6 +11,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button'
 import MoreIcon from '@material-ui/icons/MoreVert';
+import { ApplicationState } from '../_state_model/application-state';
+import { useSelector } from 'react-redux';
+import { RoleType } from '../_enum/role-type';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -78,6 +81,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function NavBar() {
   const classes = useStyles();
+  const authState = useSelector( (appState:ApplicationState)=>appState.auth)
+  
+
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -141,32 +148,41 @@ export default function NavBar() {
 
   return (
     <Fragment>
-      <AppBar position={'sticky'} color={'default'}>
+      <AppBar position={'sticky'} color={'default'} >
         <Toolbar>
           <Typography className={classes.title} variant="h4" noWrap>
-            TalentFair
+            Talent fair
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+          
+          {
+            authState.authenticated &&
+            authState.session != null &&
+            authState.session.role === RoleType.EMPLOYER &&
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'Search' }}
+              />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'Search' }}
-            />
-          </div>
+          }
+          
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-          <MenuItem>
+          {/* <MenuItem>
             <a style={{color: 'white'}} href='/login'>Sign In</a>
           </MenuItem>
           <MenuItem>
             <a style={{color: 'white'}} href='/register'>Sign Up</a>
-          </MenuItem>
+          </MenuItem> */}
+          {
+            authState.authenticated &&
             <IconButton
               edge="end"
               aria-label="Account of current user"
@@ -177,6 +193,8 @@ export default function NavBar() {
             >
               <AccountCircle />
             </IconButton>
+          }
+            
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

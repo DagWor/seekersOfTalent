@@ -1,17 +1,13 @@
 import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+import TextField from '@material-ui/core/TextField'
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import AppBar from '../../navbar'
+import { Link } from 'react-router-dom';
+
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -34,6 +30,7 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    borderRadius:'2px'
   },
 }));
 
@@ -42,19 +39,14 @@ export default function Login() {
 
   return (
       <div>
-          <AppBar />
         <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper} style={{flexDirection: "column"}}>
-            <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-            </Avatar>
             <Typography component="h1" variant="h5">
             Sign in
             </Typography>
             <form className={classes.form} noValidate>
             <TextField
-                variant="outlined"
                 margin="normal"
                 required
                 fullWidth
@@ -65,7 +57,6 @@ export default function Login() {
                 autoFocus
             />
             <TextField
-                variant="outlined"
                 margin="normal"
                 required
                 fullWidth
@@ -75,10 +66,7 @@ export default function Login() {
                 id="password"
                 autoComplete="current-password"
             />
-            <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-            />
+            
             <Button
                 href="../view-profile"
                 type="submit"
@@ -89,18 +77,13 @@ export default function Login() {
             >
                 Sign In
             </Button>
-            <Grid container>
-                <Grid item xs>
-                <Link href="#" variant="body2">
-                    Forgot password?
-                </Link>
-                </Grid>
+            {/* <Grid container>
                 <Grid item>
-                <Link href="../register" variant="body2">
+                <Link to="/register">
                     {"Don't have an account? Sign Up"}
                 </Link>
                 </Grid>
-            </Grid>
+            </Grid> */}
             </form>
         </div>
         </Container>

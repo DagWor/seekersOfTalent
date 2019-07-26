@@ -40,7 +40,6 @@ export default function BuildProfile() {
 
   return (
       <div>
-        <AppBar />
         <Container component="main" maxWidth="md">
         <CssBaseline />
         <div className={classes.paper} style={{flexDirection: "column"}}>

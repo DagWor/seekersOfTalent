@@ -1,12 +1,12 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import NavBar from './../../navbar'
 import UserCard from './user-card.tsx/user-card'
+import { useSelector } from 'react-redux';
+import { ApplicationState } from '../../../_state_model/application-state';
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -42,12 +42,12 @@ const useStyles = makeStyles(theme => ({
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function LandingPage() {
-  const classes = useStyles();
+  const classes = useStyles()
+  const authState = useSelector( (slctr:ApplicationState) => slctr.auth )
 
+  console.log('Authentication State',authState)
   return (
     <div style={{flexGrow: '-moz-initial'}}>
-      <CssBaseline />
-      <NavBar />
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
@@ -59,14 +59,14 @@ export default function LandingPage() {
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
-                <Grid item>
-                  <Button href='/recruiter-register' variant="contained" color="primary">
-                    Sign up as a Recruiter
+                <Grid item xs={6}>
+                  <Button fullWidth style={{borderRadius:'2px'}} href='/register' variant={'contained'}  color="primary">
+                    Join Talent fair
                   </Button>
                 </Grid>
-                <Grid item>
-                  <Button href='/register' variant="outlined" color="primary">
-                    Sign up as a Talent
+                <Grid item xs={6}>
+                  <Button fullWidth style={{borderRadius:'2px'}} href='/login' variant="outlined" color="primary">
+                    Already have account
                   </Button>
                 </Grid>
               </Grid>
