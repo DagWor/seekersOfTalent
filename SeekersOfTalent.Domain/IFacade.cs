@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SeekersOfTalent.Domain
 {
-    public class Class1
+    public interface IFacade
     {
+
     }
 }

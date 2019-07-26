@@ -9,4 +9,9 @@
     <PackageReference Include="Stateless" Version="4.2.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SeekersOfTalent.Data\SeekersOfTalent.Data.csproj" />
+    <ProjectReference Include="..\SeekersOfTalent.Types\SeekersOfTalent.Types.csproj" />
+  </ItemGroup>
+
 </Project>
