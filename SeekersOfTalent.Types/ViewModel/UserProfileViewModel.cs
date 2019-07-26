@@ -22,18 +22,17 @@ namespace SeekersOfTalent.Types.ViewModel
         public string PhoneNumber { get; set; }
         public string LastName { get; set; }
         public string BirthDate { get; set; }
+        public string Email { get; set; }
+
 
 
         //meta data
-        public AvailabilityViewModel IsAvailable { get; set; }
         public string Bio { get; set; }
+        public AvailabilityViewModel IsAvailable { get; set; }
         public List<SkillViewModel> Skills { get; set; }
-
         public PortfolioViewModel Portfolio { get; set; }
         public List<EmploymentViewModel> EmployementHistory { get; set; }
-
         public List<EducationViewModel> EducationHistory { get; set; }
-
         public DocumentRequest ProfilePicture { get; set; }
         public List<DocumentRequest> OtherDocs { get; set; }
     }

@@ -263,8 +263,9 @@ namespace SeekersOfTalent.Data.SotEntities
                 entity.Property(e => e.Biography).HasColumnName("biography");
 
                 entity.Property(e => e.DateOfBirth)
+                    .IsRequired()
                     .HasColumnName("date_of_birth")
-                    .HasColumnType("date");
+                    .HasMaxLength(20);
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -284,6 +285,10 @@ namespace SeekersOfTalent.Data.SotEntities
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasColumnName("password");
+
+                entity.Property(e => e.PhoneNumber)
+                    .HasColumnName("phone_number")
+                    .HasMaxLength(30);
 
                 entity.Property(e => e.ProfileImg).HasColumnName("profile_img");
 

@@ -12,7 +12,7 @@ namespace SeekersOfTalent.Domain.Infrastructure
         public UserSession Session { get; set; }
 
         public void SetContext(SotContext _context) => Context = _context;
-        public void SetClaim(UserSession session) => Session = session;
+        public void SetSession(UserSession session) => Session = session;
         public void PassContext(SotServiceBase _base, SotContext _context) => _base.SetContext(_context);
         protected UserProfileResponse GetUserProfileById(Guid userId)
         {
@@ -21,7 +21,7 @@ namespace SeekersOfTalent.Domain.Infrastructure
 
         protected UserProfileResponse UpdateUserInformation(UserProfileRequest request)
         {
-            return GetUserProfile();
+            return GetUserProfileById(Guid.NewGuid());
         }
 
 
