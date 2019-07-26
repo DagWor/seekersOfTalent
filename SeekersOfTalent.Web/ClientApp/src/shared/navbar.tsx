@@ -1,20 +1,16 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import Link from '@material-ui/core/Link';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button'
 import MoreIcon from '@material-ui/icons/MoreVert';
-import LandingPage from '../shared/pages/landing/landing'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -144,8 +140,8 @@ export default function NavBar() {
   );
 
   return (
-    <div className={classes.grow}>
-      <AppBar position="static">
+    <Fragment>
+      <AppBar position={'sticky'} color={'default'}>
         <Toolbar>
           <Typography className={classes.title} variant="h4" noWrap>
             TalentFair
@@ -197,6 +193,6 @@ export default function NavBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-    </div>
+    </Fragment>
   );
 }

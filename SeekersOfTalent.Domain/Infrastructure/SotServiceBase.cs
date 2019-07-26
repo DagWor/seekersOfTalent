@@ -32,7 +32,7 @@ namespace SeekersOfTalent.Domain.Infrastructure
                 Role = (Types.Constants.RoleType)user.RoleId,
             };
 
-            if (userResponse.Role == Types.Constants.RoleType.Employee)
+            if (userResponse.Role == Types.Constants.RoleType.EMPLOYEE)
             {
                 userResponse.Bio = user.Biography;
                 GetEmployeeSpesificInfo(userResponse);

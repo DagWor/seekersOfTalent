@@ -19,7 +19,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
-import AddIcon from '@material-ui/icons/Add';
 import { blue } from '@material-ui/core/colors';
 import SkillTable from '../view-profile/skill-table'
 import ExperienceTable from '../view-profile/experience-table'
@@ -144,7 +143,6 @@ export default function ViewProfile() {
   };
 
   const classes = useStyles();
-  const [opened, setOpened] = React.useState(true);
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -171,7 +169,7 @@ export default function ViewProfile() {
           <Grid container spacing={3}>
             {/* Basics */}
             <Grid item xs={12} md={4} lg={3}>
-                <img  src={profile} className={fixedHeightPaper}/>
+                <img  src={profile} className={fixedHeightPaper} alt={'Loading'}/>
             </Grid>
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper} style={{textAlign: 'center', backgroundColor: '#9e9e9e', paddingTop: 50}}>

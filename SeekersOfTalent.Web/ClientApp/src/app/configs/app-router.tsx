@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Login from '../../shared/pages/login/login'
 import LandingPage from '../../shared/pages/landing/landing'
 import Register from '../../shared/pages/register/register'

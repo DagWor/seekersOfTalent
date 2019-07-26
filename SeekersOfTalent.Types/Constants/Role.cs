@@ -2,7 +2,7 @@
 {
     public enum RoleType
     {
-        Employee = 1,
-        Employer = 2
+        EMPLOYEE = 1,
+        EMPLOYER = 2
     }
 }

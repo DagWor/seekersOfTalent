@@ -3,8 +3,8 @@ import {SkillViewModel} from './skill'
 import {PortfolioViewModel} from './portfolio'
 import {EmploymentViewModel} from './emoployment'
 import {DocumentRequest , DocumentResponse} from './document'
-import { EducationViewModel } from './education';
-
+import { EducationViewModel } from './education'
+import {RoleType} from './../_enum/role-type'
 
 export interface UserProfileRequest {
     id?: string;
@@ -12,8 +12,12 @@ export interface UserProfileRequest {
     phoneNumber: string;
     lastName: string;
     birthDate: string;
-    isAvailable: AvailabilityViewModel;
+    email: string;
+    role: RoleType;
+    
+    
     bio: string;
+    availablityInfo: AvailabilityViewModel;
     skills: SkillViewModel[];
     portfolio: PortfolioViewModel;
     employementHistory: EmploymentViewModel[];
@@ -27,6 +31,9 @@ export interface UserProfileResponse {
     firstName: string;
     lastName: string;
     birthDate: string;
+    role: RoleType;
+    phoneNumber: string;
+    email: string;
     bio: string;
     availablityInfo: AvailabilityViewModel;
     skills: SkillViewModel[];

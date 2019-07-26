@@ -53,7 +53,7 @@ namespace SeekersOfTalent.Domain.Services
                 SaveOtherDocumets(user.Id, request.OtherDocs);
             }
 
-            if (request.Role == Types.Constants.RoleType.Employee)
+            if (request.Role == Types.Constants.RoleType.EMPLOYEE)
                 SaveTalentData(request, user);
 
             return GetUserProfileById(user.Id);
