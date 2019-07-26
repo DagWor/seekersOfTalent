@@ -19,12 +19,13 @@ namespace SeekersOfTalent.Types.ViewModel
         //basic information 
         public Guid? Id { get; set; }
         public string FirstName { get; set; }
+        public string PhoneNumber { get; set; }
         public string LastName { get; set; }
         public string BirthDate { get; set; }
 
 
         //meta data
-        public bool IsAvailable { get; set; }
+        public AvailabilityViewModel IsAvailable { get; set; }
         public string Bio { get; set; }
         public List<SkillViewModel> Skills { get; set; }
 
@@ -68,8 +69,5 @@ namespace SeekersOfTalent.Types.ViewModel
         public DocumentResponse ProfilePicture { get; set; }
         public List<DocumentResponse> OtherDocs { get; set; }
     }
-
-
-
 
 }

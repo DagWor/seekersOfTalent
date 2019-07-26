@@ -6,5 +6,8 @@ namespace SeekersOfTalent.Types.ViewModel
 {
     public class AvailabilityViewModel
     {
+        public int Id { get; set; }
+        public bool IsAvailable { get; set; }
+        public string Explanation { get; set; }
     }
 }
