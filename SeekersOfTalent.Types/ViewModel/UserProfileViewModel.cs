@@ -37,9 +37,6 @@ namespace SeekersOfTalent.Types.ViewModel
         public DocumentRequest ProfilePicture { get; set; }
         public List<DocumentRequest> OtherDocs { get; set; }
     }
-
-
-
     public class UserProfileResponse
     {
         public UserProfileResponse()
@@ -69,5 +66,4 @@ namespace SeekersOfTalent.Types.ViewModel
         public DocumentResponse ProfilePicture { get; set; }
         public List<DocumentResponse> OtherDocs { get; set; }
     }
-
 }

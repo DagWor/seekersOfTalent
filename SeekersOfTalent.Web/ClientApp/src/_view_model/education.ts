@@ -1,4 +1,4 @@
-declare interface EducationViewModel {
+export interface EducationViewModel {
     id: number;
     fieldOfStudy: string;
     description: string;

@@ -3,6 +3,7 @@ import {SkillViewModel} from './skill'
 import {PortfolioViewModel} from './portfolio'
 import {EmploymentViewModel} from './emoployment'
 import {DocumentRequest , DocumentResponse} from './document'
+import { EducationViewModel } from './education';
 
 
 export interface UserProfileRequest {
