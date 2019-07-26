@@ -68,13 +68,13 @@ export default function LandingPage() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button href='/login' variant="contained" color="primary">
-                    Sign In
+                  <Button href='/recruiter-register' variant="contained" color="primary">
+                    Sign up as a Recruiter
                   </Button>
                 </Grid>
                 <Grid item>
                   <Button href='/register' variant="outlined" color="primary">
-                    Sign up
+                    Sign up as a Talent
                   </Button>
                 </Grid>
               </Grid>

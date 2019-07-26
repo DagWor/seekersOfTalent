@@ -8,6 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import AppBar from '../../../shared/navbar'
 import DOB from './birth-select'
+import SkillAdd from './skill-add'
+import EducationAdd from './education-add'
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -83,6 +85,16 @@ export default function BuildProfile() {
                 </Grid>
                 <Grid item xs={12}>
                 <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="phone"
+                    label="Phone Number"
+                    name="phone"
+                />
+                </Grid>
+                <Grid item xs={12}>
+                <TextField
                     fullWidth
                     id="standard-textarea"
                     label="Bio"
@@ -93,6 +105,12 @@ export default function BuildProfile() {
                 </Grid>
                 <Grid item xs={12}>
                     <DOB />
+                </Grid>
+                <Grid item xs={12}>
+                    <SkillAdd />
+                </Grid>
+                <Grid item xs={12}>
+                    <EducationAdd />
                 </Grid>
             </Grid>
             <Button

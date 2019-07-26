@@ -5,6 +5,7 @@ import LandingPage from '../../shared/pages/landing/landing'
 import Register from '../../shared/pages/register/register'
 import ViewProfile from '../../user/pages/view-profile/view-profile'
 import BuildProfile from '../../user/pages/build-profile/build-profile'
+import RecruiterRegister from '../../recruiter/pages/register/recruiter-register'
 
 function AppRouter() {
   return (
@@ -12,6 +13,7 @@ function AppRouter() {
       <div>
         <Route path="/login" exact component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/recruiter-register" component={RecruiterRegister} />
         <Route path="/landing" component={LandingPage} />
         <Route path="/view-profile" component={ViewProfile} />
         <Route path="/build-profile" component={BuildProfile} />
