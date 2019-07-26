@@ -213,6 +213,12 @@ export default function ViewProfile() {
                   <hr />
                   <ExperienceTable />
               </Paper>
+              <Paper className={classes.paper} style={{textAlign: 'center'}}>
+                  <Typography variant='h3'>
+                    Contact Information
+                  </Typography>
+                  <hr />
+              </Paper>
             </Grid>
           </Grid>
         </Container>

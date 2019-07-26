@@ -60,7 +60,7 @@ export default function LandingPage() {
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              TalentSeekers
+              TalentFair
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
               Browsing for Talent or Looking for Recruiters on the Market?
