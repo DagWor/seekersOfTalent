@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SeekersOfTalent.Api.Helpers;
+using SeekersOfTalent.Domain.Services;
 using SeekersOfTalent.Types;
 using SeekersOfTalent.Types.Constants;
 using SeekersOfTalent.Types.ViewModel;
@@ -15,14 +16,20 @@ namespace SeekersOfTalent.Api.Controllers
     [ApiController]
     public class AuthController : BaseController
     {
+        private IAuthService _authService;
+        public AuthController(IAuthService auth) => _authService = auth;
+
         [HttpPost]
         public IActionResult Login([FromBody]LoginViewModel loginModel)
         {
             try
             {
-                UserSession session = new UserSession();
+                UserSession session;
+                var isValid  = _authService.AuthenticateUser(out session, loginModel);
+                if (!isValid)
+                    return NotFound();
                 HttpContext.Session.SetSession(SessionConstants.NAME, session);
-                return Ok();
+                return Ok(session);
             }
             catch (Exception e)
             {

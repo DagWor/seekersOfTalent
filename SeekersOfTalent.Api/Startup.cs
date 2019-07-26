@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SeekersOfTalent.Domain;
+using SeekersOfTalent.Domain.Services;
 
 namespace SeekersOfTalent.Api
 {
@@ -43,8 +45,18 @@ namespace SeekersOfTalent.Api
             services.AddCors();
 
 
+            InitTransient(services);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
+
+        public void InitTransient(IServiceCollection services)
+        {
+            services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IFacade, Facade>();
+        }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SeekersOfTalent.Data\SeekersOfTalent.Data.csproj" />
     <ProjectReference Include="..\SeekersOfTalent.Types\SeekersOfTalent.Types.csproj" />
   </ItemGroup>

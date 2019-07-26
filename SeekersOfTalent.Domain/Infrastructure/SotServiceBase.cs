@@ -1,4 +1,5 @@
 ﻿using SeekersOfTalent.Data.SotEntities;
+using SeekersOfTalent.Types;
 using SeekersOfTalent.Types.ViewModel;
 using System;
 using System.Linq;
@@ -8,11 +9,22 @@ namespace SeekersOfTalent.Domain.Infrastructure
     public class SotServiceBase : IDocumentServiceBase
     {
         public SotContext Context { get; set; }
-        //public UserClaim Claim { get; set; }
+        public UserSession Session { get; set; }
 
-        //public void SetContext(OlcContext _context) => Context = _context;
-        //public void SetClaim(UserClaim claim) => Claim = claim;
-        //public void PassContext(SotServiceBase _base, OlcContext _context) => _base.SetContext(_context);
+        public void SetContext(SotContext _context) => Context = _context;
+        public void SetClaim(UserSession session) => Session = session;
+        public void PassContext(SotServiceBase _base, SotContext _context) => _base.SetContext(_context);
+        protected UserProfileResponse GetUserProfileById(Guid userId)
+        {
+            return new UserProfileResponse();
+        }
+
+        protected UserProfileResponse UpdateUserInformation(UserProfileRequest request)
+        {
+            return GetUserProfile();
+        }
+
+
 
         #region Document Services
 
