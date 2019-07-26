@@ -1,5 +1,7 @@
 ﻿using SeekersOfTalent.Types;
 using SeekersOfTalent.Types.ViewModel;
+using System;
+using System.Collections.Generic;
 
 namespace SeekersOfTalent.Domain
 {
@@ -7,6 +9,9 @@ namespace SeekersOfTalent.Domain
     {
         void SetSession(UserSession session);
         UserProfileResponse CreateUserInformation(UserProfileRequest request);
-        UserProfileResponse UpdateUserInformation(UserProfileRequest request);
+
+        UserProfileResponse GetUserProfile(Guid userId);
+
+        List<UserProfileResponse> GetEmployeeProfileList(SearchParamsViewModel spr);
     }
 }

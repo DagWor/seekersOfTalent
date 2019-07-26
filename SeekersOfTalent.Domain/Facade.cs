@@ -3,6 +3,8 @@ using SeekersOfTalent.Domain.Infrastructure;
 using SeekersOfTalent.Domain.Services;
 using SeekersOfTalent.Types;
 using SeekersOfTalent.Types.ViewModel;
+using System;
+using System.Collections.Generic;
 
 namespace SeekersOfTalent.Domain
 {
@@ -25,11 +27,12 @@ namespace SeekersOfTalent.Domain
             return _accountService.CreateUserInformation(request);
         }
 
+        public UserProfileResponse GetUserProfile(Guid userId) => GetUserProfileById(userId);
 
-        public UserProfileResponse UpdateUserInformation(UserProfileRequest request)
+        public List<UserProfileResponse> GetEmployeeProfileList(SearchParamsViewModel searchParams)
         {
             PassContext(_accountService, Context);
-            return _accountService.CreateUserInformation(request);
+            return _accountService.GetEmployeeProfileList(searchParams);
         }
     }
 }

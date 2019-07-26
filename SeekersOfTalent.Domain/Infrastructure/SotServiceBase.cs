@@ -28,14 +28,15 @@ namespace SeekersOfTalent.Domain.Infrastructure
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 BirthDate = user.DateOfBirth,
-                Bio = user.Biography,
                 ProfilePicture = user.ProfileImg == null ? null : GetDocumentResponseById((Guid)user.ProfileImg),
                 Role = (Types.Constants.RoleType)user.RoleId,
-
             };
 
             if (userResponse.Role == Types.Constants.RoleType.Employee)
+            {
+                userResponse.Bio = user.Biography;
                 GetEmployeeSpesificInfo(userResponse);
+            }
 
             return userResponse;
         }

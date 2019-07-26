@@ -59,6 +59,11 @@ namespace SeekersOfTalent.Domain.Services
             return GetUserProfileById(user.Id);
         }
 
+        internal List<UserProfileResponse> GetEmployeeProfileList(SearchParamsViewModel searchParams)
+        {
+            throw new NotImplementedException();
+        }
+
         private void SaveTalentData(UserProfileRequest request, UserInformation user)
         {
             Context.EmployeeAvailability.Add(new Data.SotEntities.EmployeeAvailability
