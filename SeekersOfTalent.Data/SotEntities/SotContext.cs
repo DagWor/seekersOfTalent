@@ -18,10 +18,11 @@ namespace SeekersOfTalent.Data.SotEntities
         public virtual DbSet<Document> Document { get; set; }
         public virtual DbSet<EducationHistory> EducationHistory { get; set; }
         public virtual DbSet<EmployeeAvailability> EmployeeAvailability { get; set; }
+        public virtual DbSet<EmployeeDocs> EmployeeDocs { get; set; }
         public virtual DbSet<EmployeePortfolio> EmployeePortfolio { get; set; }
         public virtual DbSet<EmployeeSkill> EmployeeSkill { get; set; }
+        public virtual DbSet<EmploymentHistory> EmploymentHistory { get; set; }
         public virtual DbSet<ExpertiseLvlType> ExpertiseLvlType { get; set; }
-        public virtual DbSet<JobHistory> JobHistory { get; set; }
         public virtual DbSet<RoleType> RoleType { get; set; }
         public virtual DbSet<SkillType> SkillType { get; set; }
         public virtual DbSet<UserInformation> UserInformation { get; set; }
@@ -119,6 +120,29 @@ namespace SeekersOfTalent.Data.SotEntities
                     .HasConstraintName("employee_availability_user_information_id_fk");
             });
 
+            modelBuilder.Entity<EmployeeDocs>(entity =>
+            {
+                entity.HasKey(e => new { e.DocId, e.EmployeeId })
+                    .HasName("employee_docs_pk");
+
+                entity.ToTable("employee_docs", "lb");
+
+                entity.Property(e => e.DocId).HasColumnName("doc_id");
+
+                entity.Property(e => e.EmployeeId).HasColumnName("employee_id");
+
+                entity.HasOne(d => d.Doc)
+                    .WithMany(p => p.EmployeeDocs)
+                    .HasForeignKey(d => d.DocId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("employee_docs_document_id_fk");
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.EmployeeDocs)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .HasConstraintName("employee_docs_user_information_id_fk");
+            });
+
             modelBuilder.Entity<EmployeePortfolio>(entity =>
             {
                 entity.ToTable("employee_portfolio", "lb");
@@ -171,6 +195,39 @@ namespace SeekersOfTalent.Data.SotEntities
                     .HasConstraintName("employee_skill_skill_type_id_fk");
             });
 
+            modelBuilder.Entity<EmploymentHistory>(entity =>
+            {
+                entity.ToTable("employment_history", "lb");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasDefaultValueSql("nextval('lb.employment_history_id_seq'::regclass)");
+
+                entity.Property(e => e.Description).HasColumnName("description");
+
+                entity.Property(e => e.EmployeeId).HasColumnName("employee_id");
+
+                entity.Property(e => e.EndDate)
+                    .IsRequired()
+                    .HasColumnName("end_date")
+                    .HasMaxLength(20);
+
+                entity.Property(e => e.Position)
+                    .IsRequired()
+                    .HasColumnName("position")
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.StartDate)
+                    .IsRequired()
+                    .HasColumnName("start_date")
+                    .HasMaxLength(20);
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.EmploymentHistory)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .HasConstraintName("employment_history_user_information_id_fk");
+            });
+
             modelBuilder.Entity<ExpertiseLvlType>(entity =>
             {
                 entity.ToTable("expertise_lvl_type", "types");
@@ -185,39 +242,6 @@ namespace SeekersOfTalent.Data.SotEntities
                     .IsRequired()
                     .HasColumnName("name")
                     .HasMaxLength(200);
-            });
-
-            modelBuilder.Entity<JobHistory>(entity =>
-            {
-                entity.ToTable("job_history", "lb");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasDefaultValueSql("nextval('lb.job_history_id_seq'::regclass)");
-
-                entity.Property(e => e.Description).HasColumnName("description");
-
-                entity.Property(e => e.EmployeeId).HasColumnName("employee_id");
-
-                entity.Property(e => e.EndDate)
-                    .IsRequired()
-                    .HasColumnName("end-date")
-                    .HasMaxLength(20);
-
-                entity.Property(e => e.Position)
-                    .IsRequired()
-                    .HasColumnName("position")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.StartDate)
-                    .IsRequired()
-                    .HasColumnName("start-date")
-                    .HasMaxLength(20);
-
-                entity.HasOne(d => d.Employee)
-                    .WithMany(p => p.JobHistory)
-                    .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("job_history_user_information_id_fk");
             });
 
             modelBuilder.Entity<RoleType>(entity =>
@@ -307,7 +331,7 @@ namespace SeekersOfTalent.Data.SotEntities
 
             modelBuilder.HasSequence<int>("employee_portfolio_id_seq");
 
-            modelBuilder.HasSequence<int>("job_history_id_seq");
+            modelBuilder.HasSequence<int>("employment_history_id_seq");
         }
     }
 }

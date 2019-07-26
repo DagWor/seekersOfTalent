@@ -9,9 +9,10 @@ namespace SeekersOfTalent.Data.SotEntities
         {
             EducationHistory = new HashSet<EducationHistory>();
             EmployeeAvailability = new HashSet<EmployeeAvailability>();
+            EmployeeDocs = new HashSet<EmployeeDocs>();
             EmployeePortfolio = new HashSet<EmployeePortfolio>();
             EmployeeSkill = new HashSet<EmployeeSkill>();
-            JobHistory = new HashSet<JobHistory>();
+            EmploymentHistory = new HashSet<EmploymentHistory>();
         }
 
         public Guid Id { get; set; }
@@ -28,8 +29,9 @@ namespace SeekersOfTalent.Data.SotEntities
         public virtual RoleType Role { get; set; }
         public virtual ICollection<EducationHistory> EducationHistory { get; set; }
         public virtual ICollection<EmployeeAvailability> EmployeeAvailability { get; set; }
+        public virtual ICollection<EmployeeDocs> EmployeeDocs { get; set; }
         public virtual ICollection<EmployeePortfolio> EmployeePortfolio { get; set; }
         public virtual ICollection<EmployeeSkill> EmployeeSkill { get; set; }
-        public virtual ICollection<JobHistory> JobHistory { get; set; }
+        public virtual ICollection<EmploymentHistory> EmploymentHistory { get; set; }
     }
 }

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using SeekersOfTalent.Types.Constants;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SeekersOfTalent.Types.ViewModel
 {
@@ -23,12 +23,12 @@ namespace SeekersOfTalent.Types.ViewModel
         public string LastName { get; set; }
         public string BirthDate { get; set; }
         public string Email { get; set; }
-
+        public RoleType Role { get; set; }
 
 
         //meta data
         public string Bio { get; set; }
-        public AvailabilityViewModel IsAvailable { get; set; }
+        public AvailabilityViewModel AvailablityInfo { get; set; }
         public List<SkillViewModel> Skills { get; set; }
         public PortfolioViewModel Portfolio { get; set; }
         public List<EmploymentViewModel> EmployementHistory { get; set; }
@@ -53,6 +53,9 @@ namespace SeekersOfTalent.Types.ViewModel
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string BirthDate { get; set; }
+        public RoleType Role { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
 
 
         //meta data

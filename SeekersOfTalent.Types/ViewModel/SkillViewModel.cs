@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SeekersOfTalent.Types.ViewModel
+﻿namespace SeekersOfTalent.Types.ViewModel
 {
     public class SkillViewModel
     {
@@ -10,7 +6,13 @@ namespace SeekersOfTalent.Types.ViewModel
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public string LevelOfExpertise { get; set; }
+        public Expertise LevelOfExpertise { get; set; }
 
+    }
+
+    public class Expertise
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }
