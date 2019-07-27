@@ -14,6 +14,7 @@ namespace SeekersOfTalent.Domain
         public Facade(SotContext context)
         {
             Context = context;
+            _accountService = new AccountService();
         }
 
         new public void SetSession(UserSession session)

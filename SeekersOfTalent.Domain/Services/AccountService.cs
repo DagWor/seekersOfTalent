@@ -35,7 +35,7 @@ namespace SeekersOfTalent.Domain.Services
             }
             else
             {
-                user = Context.UserInformation.Find(request.Id);
+                user = new UserInformation();
 
                 user.Id = Guid.NewGuid();
                 user.FirstName = request.FirstName;
@@ -47,6 +47,7 @@ namespace SeekersOfTalent.Domain.Services
                 user.PhoneNumber = request.PhoneNumber;
                 user.Biography = request.Bio;
                 user.RoleId = (int)request.Role;
+                user.Password = request.Password;
                 Context.UserInformation.Add(user);
                 Context.SaveChanges();
 

@@ -61,7 +61,7 @@ namespace SeekersOfTalent.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewUser(UserProfileRequest request)
+        public IActionResult AddNewUser([FromBody]UserProfileRequest request)
         {
             try
             {

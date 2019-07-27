@@ -8,6 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import profile from './profile.png'
 import Button from '@material-ui/core/Button'
+import { ApplicationState } from '../../../../_state_model/application-state';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -15,8 +18,9 @@ const useStyles = makeStyles((theme: Theme) =>
       maxWidth: 345,
     },
     media: {
-      height: 0,
-      paddingTop: '56.25%', // 16:9
+      width:'100%',
+      height: '200px',
+      //paddingTop: '56.25%', // 16:9
     },
     expand: {
       transform: 'rotate(0deg)',
@@ -36,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function UserCard() {
   const classes = useStyles();
-
+  const authState = useSelector( (appState:ApplicationState)=>appState.auth )
   return (
     <Card className={classes.card} >
       <CardContent>
@@ -52,9 +56,22 @@ export default function UserCard() {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <Button color='primary' variant={'outlined'} style={{borderRadius:'2px'}} fullWidth href='/build-profile'>
-          View
-        </Button>
+        {
+          !authState.authenticated &&
+          <Link style={{width:'100%',textDecoration:'none'}} to={'/auth'}>
+            <Button color='primary' variant={'outlined'} style={{borderRadius:'2px'}} fullWidth href='/build-profile'>
+                View
+            </Button>
+          </Link>
+        }
+        {
+          authState.authenticated &&
+          <Link to={'/view-profile/employee-id'}>
+            <Button color='primary' variant={'outlined'} style={{borderRadius:'2px'}} fullWidth href='/build-profile'>
+              View
+            </Button>
+          </Link>
+        }
       </CardActions>
     </Card>
   );

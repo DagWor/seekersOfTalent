@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SeekersOfTalent.Types.ViewModel
 {
@@ -11,7 +10,7 @@ namespace SeekersOfTalent.Types.ViewModel
             Projects = new List<Project>();
         }
         public int Id { get; set; }
-        public Guid EmployeeId { get; set; }
+        public Guid? EmployeeId { get; set; }
         public List<Project> Projects { get; set; }
     }
     public class Project

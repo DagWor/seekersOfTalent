@@ -1,5 +1,5 @@
 export interface SkillViewModel {
-    id: number;
+    id?: number;
     name: string;
     description: string;
     levelOfExpertise: string;

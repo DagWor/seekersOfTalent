@@ -11,6 +11,8 @@ export interface UserProfileRequest {
     firstName: string;
     phoneNumber: string;
     lastName: string;
+
+    password : string;
     birthDate: string;
     email: string;
     role: RoleType;

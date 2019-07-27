@@ -57,7 +57,11 @@ export default function LandingPage() {
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
               Browsing for Talent or Looking for Recruiters on the Market?
             </Typography>
-            <div className={classes.heroButtons}>
+            
+
+            {
+              !authState.authenticated &&
+              <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item xs={6}>
                   <Button fullWidth style={{borderRadius:'2px'}} href='/register' variant={'contained'}  color="primary">
@@ -71,6 +75,8 @@ export default function LandingPage() {
                 </Grid>
               </Grid>
             </div>
+            }
+            
           </Container>
         </div>
         <br />

@@ -1,14 +1,25 @@
 import React, { useState } from 'react'
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import { Container, Typography, Button } from '@material-ui/core';
-import { UserProfileRequest } from '../../../_view_model/user-information';
-import { RoleType } from '../../../_enum/role-type';
+import Grid from '@material-ui/core/Grid'
+import TextField from '@material-ui/core/TextField'
+import { Container, Typography, Button, IconButton, FormControlLabel, Radio, RadioGroup, Card, CardContent, CardMedia } from '@material-ui/core'
+import { UserProfileRequest } from '../../../_view_model/user-information'
+import { RoleType } from '../../../_enum/role-type'
+import { DocumentRequest } from '../../../_view_model/document'
+import {getBase64} from './../../util/file-helper'
+import DeleteIcon from '@material-ui/icons/Delete'
+import { SkillViewModel } from '../../../_view_model/skill';
+import { useDispatch } from 'react-redux';
+import {registerNewUser} from './../../../_setup/actions/account-actions'
+
+
+const PROFILE_ID = 'profileImg'
+const OTHER_DOCS_ID = 'otherDocs'
 
 export default function RegistrationForm() {
     const initialState:UserProfileRequest ={
         firstName:'',
         phoneNumber: '',
+        password:'',
         lastName: '',
         birthDate:'',
         email: '',
@@ -28,6 +39,7 @@ export default function RegistrationForm() {
         employementHistory: [],
         educationHistory: [],
         profilePicture: {
+            id:undefined,
             mimeType:'',
             fileName:'',
             file:''
@@ -35,10 +47,117 @@ export default function RegistrationForm() {
         otherDocs: []
     }
     const [userData, setUserData] = useState(initialState)
+    const dispatch = useDispatch()
     
     const submitData = ()=>{
-        console.log('User data ',userData)
+        dispatch(registerNewUser(userData))
     }
+
+
+
+    async function handleFileChange(tagId:string){
+        let file = (document.getElementById(tagId) as HTMLInputElement).files;
+          if(file!=null)
+          {
+              let base64 = await getBase64(file[0] as Blob); 
+              let doc: DocumentRequest =  {
+                  mimeType: file[0].type,
+                  fileName: file[0].name,
+                  file: base64,
+              }
+              tagId === PROFILE_ID 
+              ?
+              setUserData({...userData,profilePicture:doc})
+              :
+              setUserData({...userData,otherDocs:[...userData.otherDocs,doc]})
+              file = null
+          }
+      }
+  
+      function fileRow(value:DocumentRequest , key:number){
+        return (
+          <Grid style={{
+                    padding:"5px",
+                    marginBottom:"5px",
+                    border:"1px solid lightgray" 
+                }}
+                container 
+                key={key} 
+                justify="center">
+             <Grid item xs={11} >
+                <p style={{paddingTop:"10px"}}>{value.fileName}</p> 
+             </Grid>
+             <Grid item xs={1}>
+                <IconButton  onClick={()=>
+                    {
+                        let temp = userData.otherDocs
+                        temp.splice(key,1)
+                        setUserData({...userData,otherDocs:temp})
+                    }}>
+                   <DeleteIcon color={'error'}/>
+                </IconButton>
+             </Grid>
+          </Grid>
+        )
+      }
+
+      function profilePicture(value:DocumentRequest){
+        return (
+          <Grid style={{
+                    padding:"5px",
+                    marginBottom:"5px",
+                    border:"1px solid lightgray" 
+                }}
+                container 
+                justify="center">
+             <Grid item xs={11} >
+                <p style={{paddingTop:"10px"}}>{value.fileName}</p> 
+             </Grid>
+             <Grid item xs={1}>
+                <IconButton  onClick={()=>
+                    {
+                        setUserData({...userData,profilePicture:
+                            {
+                                id:undefined,
+                                mimeType:'',
+                                fileName:'',
+                                file:''
+                            }})
+                    }}>
+                   <DeleteIcon color={'error'}/>
+                </IconButton>
+             </Grid>
+          </Grid>
+        )
+      }
+
+      function skillRow(value:SkillViewModel , key:number){
+        return (
+          <Grid style={{
+                    padding:"5px",
+                    marginBottom:"5px",
+                    border:"1px solid lightgray" 
+                }}
+                container 
+                key={key} 
+                justify="center">
+             <Grid item xs={11} >
+                <p style={{paddingTop:"10px"}}>{value.name}</p> 
+                <p style={{paddingTop:"10px"}}>{value.description}</p> 
+             </Grid>
+             <Grid item xs={1}>
+                <IconButton  onClick={()=>
+                    {
+                        let temp = userData.skills
+                        temp.splice(key,1)
+                        setUserData({...userData,skills:temp})
+                    }}>
+                   <DeleteIcon color={'error'}/>
+                </IconButton>
+             </Grid>
+          </Grid>
+        )
+      }
 
     return (
         <div>
@@ -46,7 +165,6 @@ export default function RegistrationForm() {
                 <Grid container justify={'center'}>
                     <Grid item xs={10}>
                         <Grid container spacing={2} justify={'flex-start'}>
-                        
                         <Grid item md={6}>
                             <TextField
                                 required
@@ -62,6 +180,7 @@ export default function RegistrationForm() {
                                 fullWidth
                                 label="Lastname"
                                 name="lastname"
+                                onChange={(event)=>setUserData({...userData,lastName:event.target.value})}
                             />
                         </Grid>
                         <Grid item md={12}>
@@ -70,14 +189,41 @@ export default function RegistrationForm() {
                                 fullWidth
                                 label="Email"
                                 name="email"
+                                onChange={(event)=>setUserData({...userData,email:event.target.value})}
                             />
                         </Grid>
+                        
+                        <Grid item md={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                type={'password'}
+                                label="Password"
+                                value={userData.password}
+                                name="phoneNumber"
+                                onChange={(event)=>setUserData({...userData,password:event.target.value})}
+                            />
+                        </Grid>
+
+                        <Grid item md={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                type={'password'}
+                                value={userData.password}
+                                label="Re-password"
+                                name="phoneNumber"
+                                onChange={(event)=>setUserData({...userData,password:event.target.value})}
+                            />
+                        </Grid>
+
                         <Grid item md={12}>
                             <TextField
                                 required
                                 fullWidth
                                 label="Phone Number"
                                 name="phoneNumber"
+                                onChange={(event)=>setUserData({...userData,phoneNumber:event.target.value})}
                             />
                         </Grid>
                         <Grid item md={12}>
@@ -89,20 +235,27 @@ export default function RegistrationForm() {
                                 id={'date'}
                                 type={'date'}
                                 name="birthDate"
+                                onChange={(event)=>setUserData({...userData,birthDate:event.target.value})}
                             />
                         </Grid>
 
-                        <Grid item md={6}>
-                            <Typography>Role : </Typography>
+                            
+                        <Grid item md={12}>
+                            <RadioGroup
+                                        aria-label={'Role'}
+                                        value={userData.role+''}
+                                        onChange={ (event: any)=>{
+                                            setUserData({...userData,role:event.target.value})
+                                        } }
+                                        row
+                                        >
+                                        <Typography style={{padding:'15px 15px 15px 0px'}} >Select Your Role</Typography>
+                                        
+                                        <FormControlLabel  value={RoleType.EMPLOYEE + ''} control={<Radio color="primary"/>} label={'Employee'} />
+                                        <FormControlLabel value={RoleType.EMPLOYER +''} control={<Radio color="primary"/>} label={'Employer'} />
+                                </RadioGroup>
                         </Grid>
-                        <Grid item md={6}>
-                            <TextField
-                                required
-                                fullWidth
-                                label="Employee"
-                                name="firstname"
-                            />
-                        </Grid>
+                       
 
                         <Grid item md={12}>
                             <TextField
@@ -111,18 +264,44 @@ export default function RegistrationForm() {
                                 rows={5}
                                 label="Bio"
                                 name="bio"
+                                onChange={(event)=>setUserData({...userData,bio:event.target.value})}
                             />
                         </Grid>
-                        <Grid item md={12}>
-                            <TextField
-                                required
-                                fullWidth
-                                label="Employee"
-                                name="firstname"
-                            />
+                        {
+                            userData.profilePicture.fileName.trim().length>0 &&
+                            profilePicture(userData.profilePicture)  
+                        }
+                        <Grid item xs={12}>
+                            <input id={PROFILE_ID} type="file" onChange={()=>handleFileChange(PROFILE_ID)}/>
+                        </Grid>
+
+                        {
+                            userData.otherDocs.map(fileRow)  
+                        }
+                        <Grid item xs={12}>
+                            <input id={OTHER_DOCS_ID} type="file" onChange={()=>handleFileChange(OTHER_DOCS_ID)}/>
+                        </Grid>
+
+                        {
+                            userData.skills.map(skillRow)
+                        }
+                        <Grid item md={4}>
+                            <Button style={{borderRadius:'2px'}} onClick={submitData} fullWidth variant={'outlined'}>
+                                Add Skill
+                            </Button>
+                        </Grid>
+                        <Grid item md={4}>
+                            <Button style={{borderRadius:'2px'}} onClick={submitData} fullWidth variant={'outlined'}>
+                                Add Employment
+                            </Button>
+                        </Grid>
+                        <Grid item md={4}>
+                            <Button style={{borderRadius:'2px'}} onClick={submitData} fullWidth variant={'outlined'}>
+                                Add Education
+                            </Button>
                         </Grid>
                         <Grid item md={12}>
-                            <Button onClick={submitData} fullWidth variant={'outlined'}>
+                            <Button style={{borderRadius:'2px'}} onClick={submitData} fullWidth variant={'outlined'}>
                                 submit
                             </Button>
                         </Grid>
