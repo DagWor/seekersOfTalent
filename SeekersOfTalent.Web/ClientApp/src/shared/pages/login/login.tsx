@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField'
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { Link } from 'react-router-dom';
-
+import { LoginViewModel } from '../../../_view_model/login-view-model';
+import { useDispatch } from 'react-redux';
+import {validateCredential} from './../../../_setup/actions/auth-actions'
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -37,6 +37,17 @@ const useStyles = makeStyles(theme => ({
 export default function Login() {
   const classes = useStyles();
 
+  const initialState : LoginViewModel={
+    email:'',
+    password:'',
+    role:1 
+  }
+  const dispatch= useDispatch()
+  const [credential, setCredential] = useState(initialState)
+  const submitCredRequest =()=>{
+    dispatch(validateCredential(credential))
+  }
+
   return (
       <div>
         <Container component="main" maxWidth="xs">
@@ -50,10 +61,9 @@ export default function Login() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
                 label="Email Address"
-                name="email"
                 autoComplete="email"
+                onChange={(event)=> setCredential({...credential,email:event.target.value})}
                 autoFocus
             />
             <TextField
@@ -65,15 +75,15 @@ export default function Login() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={(event)=> setCredential({...credential,password:event.target.value})}
             />
             
             <Button
-                href="../view-profile"
-                type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                onClick={submitCredRequest}
             >
                 Sign In
             </Button>

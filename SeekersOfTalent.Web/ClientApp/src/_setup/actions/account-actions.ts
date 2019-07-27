@@ -10,8 +10,7 @@ export const registerNewUser: ActionCreator<ThunkAction<Promise<Action>, any, vo
     return async (dispatch:any):Promise<Action> => {
       return account_service.createNewUser(data)
       
-      .then(response=>{
-          console.log('API RESPONSE ',response.data)     
+      .then(response=>{  
           return response.data;  
       })
       .catch(error=>
@@ -22,3 +21,4 @@ export const registerNewUser: ActionCreator<ThunkAction<Promise<Action>, any, vo
         })
     }
   }
+

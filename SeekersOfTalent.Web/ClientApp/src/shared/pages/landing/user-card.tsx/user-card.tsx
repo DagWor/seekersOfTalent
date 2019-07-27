@@ -66,7 +66,7 @@ export default function UserCard() {
         }
         {
           authState.authenticated &&
-          <Link to={'/view-profile/employee-id'}>
+          <Link style={{width:'100%',textDecoration:'none'}} to={'/view-profile/employee-id'}>
             <Button color='primary' variant={'outlined'} style={{borderRadius:'2px'}} fullWidth href='/build-profile'>
               View
             </Button>

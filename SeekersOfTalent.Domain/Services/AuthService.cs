@@ -9,10 +9,10 @@ using System.Linq;
 
 namespace SeekersOfTalent.Domain.Services
 {
-    public class AuthService : SotServiceBase , IAuthService
+    public class AuthService : SotServiceBase, IAuthService
     {
         public AuthService(SotContext context) => Context = context;
-        public bool AuthenticateUser( out UserSession session, LoginViewModel request)
+        public bool AuthenticateUser(out UserSession session, LoginViewModel request)
         {
             session = null;
             try
@@ -26,6 +26,8 @@ namespace SeekersOfTalent.Domain.Services
                 {
                     Id = usr.Id,
                     Email = usr.Email,
+                    PhoneNumber = usr.PhoneNumber,
+                    Role = (SeekersOfTalent.Types.Constants.RoleType)usr.RoleId,
                     FirstName = usr.FirstName,
                     LastName = usr.LastName
                 };
@@ -36,5 +38,7 @@ namespace SeekersOfTalent.Domain.Services
                 return false;
             }
         }
+
+
     }
 }

@@ -148,6 +148,7 @@ export default function ViewProfile() {
   return (
     <div className={classes.root}>
       <CssBaseline />
+{/*       
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
@@ -163,6 +164,7 @@ export default function ViewProfile() {
           <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
         </Toolbar>
       </AppBar>
+       */}
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
