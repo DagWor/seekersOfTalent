@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.scss'
 import AppLayout from './layout/app-layout'
 import {BrowserRouter} from 'react-router-dom'
-import { Provider, useDispatch } from 'react-redux';
+import { Provider} from 'react-redux';
 import store from './../_setup/store'
-import { checkSession } from '../_setup/actions/auth-actions';
 
 function App() {
   

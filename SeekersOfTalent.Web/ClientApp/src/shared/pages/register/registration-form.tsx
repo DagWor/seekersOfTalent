@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import Grid from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
-import { Container, Typography, Button, IconButton, FormControlLabel, Radio, RadioGroup, Card, CardContent, CardMedia } from '@material-ui/core'
+import { Grid,Container, Typography, Button, IconButton, FormControlLabel, Radio, RadioGroup } from '@material-ui/core'
 import { UserProfileRequest } from '../../../_view_model/user-information'
 import { RoleType } from '../../../_enum/role-type'
 import { DocumentRequest } from '../../../_view_model/document'

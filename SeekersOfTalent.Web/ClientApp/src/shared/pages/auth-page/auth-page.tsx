@@ -2,7 +2,7 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import Login from '../login/login';
 // import SignUp from '../register/register';
-import RegistrationForm from '../register/registration-form';
+import RegistrationForm from './../register/registration-form';
 
 export default function AuthPage() {
     return (

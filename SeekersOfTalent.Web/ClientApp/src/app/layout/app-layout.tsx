@@ -9,7 +9,7 @@ export default function AppLayout() {
     
     const appState = useSelector((state:ApplicationState)=>state.auth)
     const dispatch = useDispatch()
-        useEffect(() => {
+    useEffect(() => {
         dispatch(checkSession())
     }, [])
     

@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField'
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles'
 import { LoginViewModel } from '../../../_view_model/login-view-model';
 import { useDispatch } from 'react-redux';
 import {validateCredential} from './../../../_setup/actions/auth-actions'
+import { RoleType } from '../../../_enum/role-type';
+import { Grid,Container, Typography, Button, FormControlLabel, Radio, RadioGroup } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
   '@global': {
@@ -45,6 +44,7 @@ export default function Login() {
   const dispatch= useDispatch()
   const [credential, setCredential] = useState(initialState)
   const submitCredRequest =()=>{
+    console.log('CRED',credential)
     dispatch(validateCredential(credential))
   }
 
@@ -77,7 +77,19 @@ export default function Login() {
                 autoComplete="current-password"
                 onChange={(event)=> setCredential({...credential,password:event.target.value})}
             />
-            
+            <Grid item md={12}>
+                <RadioGroup
+                            aria-label={'Role'}
+                            value={credential.role+''}
+                            onChange={ (event: any)=>{
+                                setCredential({...credential,role:event.target.value})
+                            } }
+                            row
+                            >
+                            <FormControlLabel  value={RoleType.EMPLOYEE + ''} control={<Radio color="primary"/>} label={'Employee'} />
+                            <FormControlLabel value={RoleType.EMPLOYER +''} control={<Radio color="primary"/>} label={'Employer'} />
+                    </RadioGroup>
+            </Grid>
             <Button
                 fullWidth
                 variant="contained"
