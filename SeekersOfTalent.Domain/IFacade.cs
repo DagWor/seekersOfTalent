@@ -1,4 +1,5 @@
-﻿using SeekersOfTalent.Types;
+﻿using SeekersOfTalent.Data.SotEntities;
+using SeekersOfTalent.Types;
 using SeekersOfTalent.Types.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,6 @@ namespace SeekersOfTalent.Domain
 
         List<UserProfileResponse> GetEmployeeProfileList(SearchParamsViewModel spr);
 
-        DocumentRequest GetDocumentByteById(Guid docId);
+        Document GetDocumentByteById(Guid docId);
     }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -18,11 +18,11 @@ import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import { blue } from '@material-ui/core/colors';
 import SkillTable from '../view-profile/skill-table'
-import ExperienceTable from '../view-profile/experience-table'
+import ExperienceTable from './education-table'
 import { useSelector,  useDispatch } from 'react-redux';
 import { ApplicationState } from '../../../_state_model/application-state';
 import {getUserProfile} from './../../../_setup/actions/profile-actions'
-
+import PortfolieTable from './portfoli-table'
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -134,6 +134,8 @@ interface IProps{
   match:any
 }
 
+
+
 export default function ViewProfile(props : IProps) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(options[1]);
@@ -157,8 +159,22 @@ export default function ViewProfile(props : IProps) {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
-   
-      <main className={classes.content}>
+   <Fragment>
+
+     {
+       prfl.loading &&
+       <p>Loading talent Information</p>
+     }
+     {
+       !prfl.loading &&
+       prfl.error &&
+       <p>ERROR : {prfl.message}</p>
+     }
+     {
+       !prfl.loading &&
+       !prfl.error &&
+       prfl.profile != undefined &&
+        <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
@@ -169,42 +185,50 @@ export default function ViewProfile(props : IProps) {
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper} style={{textAlign: 'center', backgroundColor: '#9e9e9e', paddingTop: 50}}>
               <Typography variant="h2" gutterBottom style={{color: 'white'}}>
-                Dagmawi Worku
+                {prfl.profile.firstName + ' '+prfl.profile.lastName }
               </Typography>
               <Typography variant="body2" gutterBottom style={{color: 'white'}}>
-                dagmawiworku@gmail.com - +251947391372
+                {prfl.profile.email}
               </Typography>
-              <Typography variant="subtitle1" gutterBottom style={{color: 'white'}}>
-                Web Developer
-              </Typography>
-              <Typography variant="subtitle2" gutterBottom style={{color: 'white'}}>
-                Addis Ababa, Ethiopia
+              <Typography variant="body2" gutterBottom style={{color: 'white'}}>
+                {prfl.profile.phoneNumber}
               </Typography>
               </Paper>
             </Grid>
             <Grid item xs={12}>
-              <Paper className={classes.paper} style={{textAlign: 'center'}}>
-                  <Typography variant='h3'>
-                    Skills
-                  </Typography>
-                  <hr />
-                  <SkillTable />
-              </Paper>
               <Paper className={classes.paper}>
                   <Typography variant='h3' style={{textAlign: 'center'}}>
                     Bio
                   </Typography>
                   <hr />
                   <p>
-                    this is  the bio of the individual in question
+                    {prfl.profile.bio}
                   </p>
               </Paper>
+
               <Paper className={classes.paper} style={{textAlign: 'center'}}>
                   <Typography variant='h3'>
-                    Experience
+                    Skills
                   </Typography>
                   <hr />
-                  <ExperienceTable />
+                  <SkillTable skills={prfl.profile.skills}/>
+              </Paper>
+              
+              <Paper className={classes.paper} style={{textAlign: 'center'}}>
+                  <Typography variant='h3'>
+                    Portfoleo
+                  </Typography>
+                  <hr />
+                  <PortfolieTable  portfolioHistory={prfl.profile.portfolio}/>
+              </Paper>
+              
+
+              <Paper className={classes.paper} style={{textAlign: 'center'}}>
+                  <Typography variant='h3'>
+                    Educational background
+                  </Typography>
+                  <hr />
+                  <ExperienceTable educationHistory={prfl.profile.educationHistory} />
               </Paper>
               <Paper className={classes.paper} style={{textAlign: 'center'}}>
                   <Typography variant='h3'>
@@ -216,5 +240,7 @@ export default function ViewProfile(props : IProps) {
           </Grid>
         </Container>
       </main>
+      }
+   </Fragment>
   );
 }

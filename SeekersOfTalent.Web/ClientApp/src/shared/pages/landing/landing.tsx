@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -67,27 +67,35 @@ export default function LandingPage() {
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              TalentFair
-            </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Browsing for Talent or Looking for Recruiters on the Market?
-            </Typography>
+            
+            {
+
+            }
             
 
             {
               !authState.authenticated &&
-              <div className={classes.heroButtons}>
-              <Grid container spacing={2} justify="center">
-                <Grid item xs={6}>
-                  <Link style={{textDecoration:'none'}} to={'/auth'}>
-                    <Button fullWidth style={{borderRadius:'2px'}} variant="outlined" color="primary">
-                      Join Talent fair
-                    </Button>
-                  </Link>
-                </Grid>
-              </Grid>
-            </div>
+              <Fragment>
+                <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                  TalentFair
+                </Typography>
+                <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                  Browsing for Talent or Looking for Recruiters on the Market?
+                </Typography>
+                
+                
+                <div className={classes.heroButtons}>
+                  <Grid container spacing={2} justify="center">
+                    <Grid item xs={6}>
+                      <Link style={{textDecoration:'none'}} to={'/auth'}>
+                        <Button fullWidth style={{borderRadius:'2px'}} variant="outlined" color="primary">
+                          Join Talent fair
+                        </Button>
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </div>
+              </Fragment>
             }
             
           </Container>

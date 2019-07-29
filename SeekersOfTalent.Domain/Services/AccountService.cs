@@ -145,7 +145,6 @@ namespace SeekersOfTalent.Domain.Services
 
         }
 
-#warning Employee can not save other docs yet
         private void SaveOtherDocumets(Guid id, List<DocumentRequest> otherDocs)
         {
             otherDocs.ForEach(doc =>

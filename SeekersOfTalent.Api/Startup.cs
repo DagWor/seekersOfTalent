@@ -42,7 +42,6 @@ namespace SeekersOfTalent.Api
 
             services.AddCors();
 
-
             var _sotConnection = Configuration.GetConnectionString("SOTConnection");
             services.AddDbContext<SotContext>(
                 option => option.UseNpgsql(_sotConnection));

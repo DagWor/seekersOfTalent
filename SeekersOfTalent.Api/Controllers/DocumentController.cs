@@ -20,8 +20,7 @@ namespace olc.api.Controllers
                 var document = _facade.GetDocumentByteById(docId);
                 if (document == null)
                     return NotFound();
-
-                return File(document.File, document.MimeType, null);
+                return File(document.File, document.Mimetype, document.Filename);
             }
             catch (Exception e)
             {

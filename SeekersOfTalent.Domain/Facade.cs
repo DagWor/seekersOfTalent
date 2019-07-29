@@ -36,9 +36,9 @@ namespace SeekersOfTalent.Domain
             return _accountService.GetEmployeeProfileList(searchParams);
         }
 
-        public DocumentRequest GetDocumentByteById(Guid docId)
+        public Document GetDocumentByteById(Guid docId)
         {
-            return GetDocumentById(docId);
+            return GetByteDocumentById(docId);
         }
     }
 }

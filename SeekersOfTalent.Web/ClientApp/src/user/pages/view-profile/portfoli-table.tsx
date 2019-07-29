@@ -6,7 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { SkillViewModel } from '../../../_view_model/skill';
+import { PortfolioViewModel } from '../../../_view_model/portfolio';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,41 +21,48 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function createData(name: string, years: number, skillRate: number ) {
-    return { name, years, skillRate}
+function createData(name: string, years: number, jobTitle: string ) {
+    return { name, years, jobTitle}
 }
 
 const rows = [
-  createData('Java Programming', 6, 7),
-  createData('Javascript', 6, 8),
+  createData('Better Mobile Security', 6, 'Developer'),
+  createData('ModernETH', 6, 'Programmer'),
 ];
+
+
 interface IProps{
-  skills : SkillViewModel[]
+  portfolioHistory : PortfolioViewModel
 }
 
-export default function SkillTable(props:IProps) {
+export default function PortfolieTable(props:IProps) {
   const classes = useStyles();
+
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Skill Type</TableCell>
-            <TableCell align="right">Description</TableCell>
-            <TableCell align="right">Level of experty</TableCell>
+            <TableCell>Field of study</TableCell>
+            <TableCell align="justify">Project name</TableCell>
+            <TableCell align="right">Project Description</TableCell>
+            <TableCell align="right">Links</TableCell>
           </TableRow>
         </TableHead>
+        
         <TableBody>
-          {props.skills.map( (skill,key) => (
+          {props.portfolioHistory.projects.map( (proj ,key) => (
             <TableRow key={key}>
               <TableCell component="th" scope="row">
-                {skill.name}
+                {proj.name}
               </TableCell>
-              <TableCell align="right">{skill.description}</TableCell>
-              <TableCell align="right">{skill.levelOfExpertise.name}</TableCell>
+              <TableCell align={'justify'}>{proj.description}</TableCell>
+              <TableCell align="justify">{proj.links}</TableCell>
             </TableRow>
           ))}
         </TableBody>
+
+
       </Table>
     </Paper>
   );

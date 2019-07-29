@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     media: {
       width:'100%',
-      height: '200px',
+      height: '250px',
       //paddingTop: '56.25%', // 16:9
     },
     expand: {
@@ -55,17 +55,15 @@ export default function UserCard(props: IProps) {
   return (
     <Card className={classes.card} >
       <CardContent>
-      {/* <CardMedia
+      <CardMedia
         className={classes.media}
         // image={profile}
-        image={`${baseUrl}Document/GetDocumentById/${props.talent.profilePicture.id}`}
+        image={`${documentUrl}${props.talent.profilePicture.id}`}
         title="profile"
-      /> */}
-      <img src={`${documentUrl}${props.talent.profilePicture.id}`} alt="Profile Picture"/>
-      <Typography variant={'h6'}>Dagmawi Werku</Typography>
+      />
+      <Typography variant={'h6'}>{props.talent.firstName+' '+props.talent.lastName}</Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          This is where the section where the bio of this particular talent
-          goes so the everyone can get a general idea of the individual.
+           {props.talent.bio}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -79,7 +77,7 @@ export default function UserCard(props: IProps) {
         }
         {
           authState.authenticated &&
-          <Link style={{width:'100%',textDecoration:'none'}} to={'/view-profile/employee-id'}>
+          <Link style={{width:'100%',textDecoration:'none'}} to={`/view-profile/${props.talent.id}`}>
             <Button color='primary' variant={'outlined'} style={{borderRadius:'2px'}} fullWidth href='/build-profile'>
               View
             </Button>

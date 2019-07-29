@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { EducationViewModel } from '../../../_view_model/education';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -29,7 +30,12 @@ const rows = [
   createData('ModernETH', 6, 'Programmer'),
 ];
 
-export default function ExperienceTable() {
+
+interface IProps{
+  educationHistory : EducationViewModel[]
+}
+
+export default function ExperienceTable(props:IProps) {
   const classes = useStyles();
 
   return (
@@ -37,22 +43,27 @@ export default function ExperienceTable() {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell>Skill Type</TableCell>
-            <TableCell align="right">Years of Experience</TableCell>
-            <TableCell align="right">Job Title</TableCell>
+            <TableCell>Field of study</TableCell>
+            <TableCell align="justify">History</TableCell>
+            <TableCell align="right">Start Date</TableCell>
+            <TableCell align="right">End Date</TableCell>
           </TableRow>
         </TableHead>
+        
         <TableBody>
-          {rows.map(row => (
-            <TableRow key={row.name}>
+          {props.educationHistory.map( (education ,key) => (
+            <TableRow key={key}>
               <TableCell component="th" scope="row">
-                {row.name}
+                {education.fieldOfStudy}
               </TableCell>
-              <TableCell align="right">{row.years}</TableCell>
-              <TableCell align="right">{row.jobTitle}</TableCell>
+              <TableCell align={'justify'}>{education.description}</TableCell>
+              <TableCell align="right">{education.startDate}</TableCell>
+              <TableCell align="right">{education.endDate}</TableCell>
             </TableRow>
           ))}
         </TableBody>
+
+
       </Table>
     </Paper>
   );
