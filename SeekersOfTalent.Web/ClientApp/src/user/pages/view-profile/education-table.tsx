@@ -35,7 +35,7 @@ interface IProps{
   educationHistory : EducationViewModel[]
 }
 
-export default function ExperienceTable(props:IProps) {
+export default function EducationTable(props:IProps) {
   const classes = useStyles();
 
   return (

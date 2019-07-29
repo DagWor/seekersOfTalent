@@ -18,7 +18,7 @@ import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import { blue } from '@material-ui/core/colors';
 import SkillTable from '../view-profile/skill-table'
-import ExperienceTable from './education-table'
+import EducationTable from './education-table'
 import { useSelector,  useDispatch } from 'react-redux';
 import { ApplicationState } from '../../../_state_model/application-state';
 import {getUserProfile} from './../../../_setup/actions/profile-actions'
@@ -124,6 +124,7 @@ const useStyles = makeStyles(theme => ({
   appBarSpacer: theme.mixins.toolbar,
   paper: {
     padding: theme.spacing(2),
+    marginTop: theme.spacing(2)
   },
   fixedHeight: {
     height: 240,
@@ -228,7 +229,7 @@ export default function ViewProfile(props : IProps) {
                     Educational background
                   </Typography>
                   <hr />
-                  <ExperienceTable educationHistory={prfl.profile.educationHistory} />
+                  <EducationTable educationHistory={prfl.profile.educationHistory} />
               </Paper>
               <Paper className={classes.paper} style={{textAlign: 'center'}}>
                   <Typography variant='h3'>

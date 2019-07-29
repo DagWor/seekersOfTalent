@@ -161,10 +161,13 @@ export default function RegistrationForm() {
     return (
         <div>
             <Container component={'main'} maxWidth={'md'}> 
+            <Typography component="h1" variant="h5">
+            Register Here
+            </Typography>
                 <Grid container justify={'center'}>
-                    <Grid item xs={10}>
+                    <Grid item xs={12}>
                         <Grid container spacing={2} justify={'flex-start'}>
-                        <Grid item md={6}>
+                        <Grid item md={6} xs={6}>
                             <TextField
                                 required
                                 fullWidth
@@ -173,7 +176,7 @@ export default function RegistrationForm() {
                                 onChange={(event)=>setUserData({...userData,firstName:event.target.value})}
                             />
                         </Grid>
-                        <Grid item md={6}>
+                        <Grid item md={6} xs={6}>
                             <TextField
                                 required
                                 fullWidth
@@ -182,7 +185,7 @@ export default function RegistrationForm() {
                                 onChange={(event)=>setUserData({...userData,lastName:event.target.value})}
                             />
                         </Grid>
-                        <Grid item md={12}>
+                        <Grid item md={12} xs={12}>
                             <TextField
                                 required
                                 fullWidth
@@ -192,7 +195,7 @@ export default function RegistrationForm() {
                             />
                         </Grid>
                         
-                        <Grid item md={12}>
+                        <Grid item md={12} xs={12}>
                             <TextField
                                 required
                                 fullWidth
@@ -204,7 +207,7 @@ export default function RegistrationForm() {
                             />
                         </Grid>
 
-                        <Grid item md={12}>
+                        <Grid item md={12} xs={12}>
                             <TextField
                                 required
                                 fullWidth
@@ -216,7 +219,7 @@ export default function RegistrationForm() {
                             />
                         </Grid>
 
-                        <Grid item md={12}>
+                        <Grid item md={12} xs={12}>
                             <TextField
                                 required
                                 fullWidth
@@ -225,7 +228,7 @@ export default function RegistrationForm() {
                                 onChange={(event)=>setUserData({...userData,phoneNumber:event.target.value})}
                             />
                         </Grid>
-                        <Grid item md={12}>
+                        <Grid item md={12} xs={12}>
                             <TextField
                                 required
                                 label="Birthdate"
@@ -239,24 +242,24 @@ export default function RegistrationForm() {
                         </Grid>
 
                             
-                        <Grid item md={12}>
+                        <Typography >Select Your Role</Typography>
+                                    
+                        <Grid item md={12} xs={12}>
                             <RadioGroup
-                                        aria-label={'Role'}
-                                        value={userData.role+''}
-                                        onChange={ (event: any)=>{
-                                            setUserData({...userData,role:event.target.value})
-                                        } }
-                                        row
-                                        >
-                                        <Typography style={{padding:'15px 15px 15px 0px'}} >Select Your Role</Typography>
-                                        
-                                        <FormControlLabel  value={RoleType.EMPLOYEE + ''} control={<Radio color="primary"/>} label={'Employee'} />
-                                        <FormControlLabel value={RoleType.EMPLOYER +''} control={<Radio color="primary"/>} label={'Employer'} />
+                                aria-label={'Role'}
+                                value={userData.role+''}
+                                onChange={ (event: any)=>{
+                                    setUserData({...userData,role:event.target.value})
+                                } }
+                                row
+                                >
+                                    <FormControlLabel  value={RoleType.EMPLOYEE + ''} control={<Radio color="primary"/>} label={'Employee'} />
+                                    <FormControlLabel value={RoleType.EMPLOYER +''} control={<Radio color="primary"/>} label={'Employer'} />
                                 </RadioGroup>
                         </Grid>
                        
 
-                        <Grid item md={12}>
+                        <Grid item md={12} xs={12}>
                             <TextField
                                 fullWidth
                                 multiline
@@ -284,23 +287,23 @@ export default function RegistrationForm() {
                         {
                             userData.skills.map(skillRow)
                         }
-                        <Grid item md={4}>
+                        <Grid item md={4} xs={12}>
                             <Button style={{borderRadius:'2px'}} onClick={submitData} fullWidth variant={'outlined'}>
                                 Add Skill
                             </Button>
                         </Grid>
-                        <Grid item md={4}>
+                        <Grid item md={4} xs={12}>
                             <Button style={{borderRadius:'2px'}} onClick={submitData} fullWidth variant={'outlined'}>
                                 Add Employment
                             </Button>
                         </Grid>
-                        <Grid item md={4}>
+                        <Grid item md={4} xs={12}>
                             <Button style={{borderRadius:'2px'}} onClick={submitData} fullWidth variant={'outlined'}>
                                 Add Education
                             </Button>
                         </Grid>
-                        <Grid item md={12}>
-                            <Button style={{borderRadius:'2px'}} onClick={submitData} fullWidth variant={'outlined'}>
+                        <Grid item md={12} xs={12}>
+                            <Button color='primary' style={{borderRadius:'2px'}} onClick={submitData} fullWidth variant={'outlined'}>
                                 submit
                             </Button>
                         </Grid>
