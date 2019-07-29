@@ -17,7 +17,7 @@ export default class AuthService {
     }
 
     logoutUser(){
-        let url=``
+        let url=`${baseUrl}Auth/Logout`
         return Axios.get(url,{...config})
     }
 }

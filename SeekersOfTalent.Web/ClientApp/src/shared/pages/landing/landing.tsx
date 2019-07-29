@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import UserCard from './user-card.tsx/user-card'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ApplicationState } from '../../../_state_model/application-state';
+import { Link } from 'react-router-dom';
+import { fetchTalentList } from '../../../_setup/actions/talents-action';
+import { SearchParamsViewModel } from '../../../_view_model/search-params';
 
 const useStyles = makeStyles(theme => ({
   icon: {
@@ -39,11 +42,24 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 export default function LandingPage() {
+  
+  const initSearchParams: SearchParamsViewModel ={
+    levelOfExpertise: 0,
+    typeOfSkill: '',
+    studyField: '',
+  }
+  
   const classes = useStyles()
   const authState = useSelector( (slctr:ApplicationState) => slctr.auth )
+  const talent = useSelector( (appTlnt: ApplicationState )=> appTlnt.talent )
+  const [searchParams,setSearchParams] = useState(initSearchParams)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    console.log('[Effect ] : Loading Talents')
+    dispatch(fetchTalentList(searchParams))
+  }, [])
 
   console.log('Authentication State',authState)
   return (
@@ -64,14 +80,11 @@ export default function LandingPage() {
               <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item xs={6}>
-                  <Button fullWidth style={{borderRadius:'2px'}} href='/register' variant={'contained'}  color="primary">
-                    Join Talent fair
-                  </Button>
-                </Grid>
-                <Grid item xs={6}>
-                  <Button fullWidth style={{borderRadius:'2px'}} href='/login' variant="outlined" color="primary">
-                    Already have account
-                  </Button>
+                  <Link style={{textDecoration:'none'}} to={'/auth'}>
+                    <Button fullWidth style={{borderRadius:'2px'}} variant="outlined" color="primary">
+                      Join Talent fair
+                    </Button>
+                  </Link>
                 </Grid>
               </Grid>
             </div>
@@ -82,10 +95,11 @@ export default function LandingPage() {
         <br />
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
+          
           <Grid container spacing={4}>
-            {cards.map(card => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <UserCard />
+            {talent.talents.map((tlnt,key) => (
+              <Grid item key={key} xs={12} sm={6} md={4}>
+                <UserCard talent={tlnt} />
               </Grid>
             ))}
           </Grid>

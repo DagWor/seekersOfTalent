@@ -44,7 +44,6 @@ export default function Login() {
   const dispatch= useDispatch()
   const [credential, setCredential] = useState(initialState)
   const submitCredRequest =()=>{
-    console.log('CRED',credential)
     dispatch(validateCredential(credential))
   }
 

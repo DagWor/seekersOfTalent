@@ -35,5 +35,10 @@ namespace SeekersOfTalent.Domain
             PassContext(_accountService, Context);
             return _accountService.GetEmployeeProfileList(searchParams);
         }
+
+        public DocumentRequest GetDocumentByteById(Guid docId)
+        {
+            return GetDocumentById(docId);
+        }
     }
 }

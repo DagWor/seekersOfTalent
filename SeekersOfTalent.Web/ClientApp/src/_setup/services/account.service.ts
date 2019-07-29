@@ -10,4 +10,9 @@ export default class AccountService {
         let url = `${baseUrl}Account/AddNewUser`
         return Axios.post(url, data,{...config})
     }
+
+    getUserProfile(userId : string){
+        let url = `${baseUrl}Account/GetUserProfile/${userId}`
+        return Axios.get(url,{...config})
+    }
 }

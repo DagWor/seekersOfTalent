@@ -46,7 +46,6 @@ namespace SeekersOfTalent.Api.Controllers
                 return ErrorCode(e);
             }
         }
-
         [HttpGet]
         public IActionResult Logout()
         {

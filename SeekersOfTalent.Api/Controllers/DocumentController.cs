@@ -6,27 +6,22 @@ using System;
 namespace olc.api.Controllers
 {
     [ApiController]
-    [Route("api/olc/[controller]")]
+    [Route("api/sot/[controller]/[action]")]
     public class DocumentController : BaseController
     {
         private readonly IFacade _facade;
         public DocumentController(IFacade facade) => _facade = facade;
 
-        [HttpGet("{action}/{docId}")]
+        [HttpGet("{docId}")]
         public IActionResult GetDocumentById(Guid docId)
         {
             try
             {
-                return Ok();
-                //var document = _facade.GetByteDocumentById(docId);
-                //if (document == null)
-                //    return NotFound();
+                var document = _facade.GetDocumentByteById(docId);
+                if (document == null)
+                    return NotFound();
 
-                //System.IO.File.WriteAllBytes(Directory.GetCurrentDirectory(), document.File);
-
-                //return File(document.File,document.Mimetype,null);
-
-                //return Ok(File(document.File, document.MimeType, document.FileName));
+                return File(document.File, document.MimeType, null);
             }
             catch (Exception e)
             {

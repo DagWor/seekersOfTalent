@@ -24,6 +24,7 @@ namespace SeekersOfTalent.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
+
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -67,12 +68,13 @@ namespace SeekersOfTalent.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
             var o = app.UseCors(builder => builder
                  .AllowAnyMethod()
                  .AllowAnyHeader()
                  .AllowCredentials()
-                 .WithOrigins(origins));
+                // .AllowAnyOrigin());
+                .WithOrigins(origins));
             app.UseSession();
             app.UseMvc();
         }

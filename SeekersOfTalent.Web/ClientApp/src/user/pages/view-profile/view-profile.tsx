@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container'; 
 import Grid from '@material-ui/core/Grid';
@@ -22,6 +19,10 @@ import PersonIcon from '@material-ui/icons/Person';
 import { blue } from '@material-ui/core/colors';
 import SkillTable from '../view-profile/skill-table'
 import ExperienceTable from '../view-profile/experience-table'
+import { useSelector,  useDispatch } from 'react-redux';
+import { ApplicationState } from '../../../_state_model/application-state';
+import {getUserProfile} from './../../../_setup/actions/profile-actions'
+
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -129,9 +130,19 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ViewProfile() {
+interface IProps{
+  match:any
+}
+
+export default function ViewProfile(props : IProps) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(options[1]);
+
+  const dispatch = useDispatch()
+  const prfl = useSelector( (appState : ApplicationState)=>appState.profile)
+  useEffect(() => {
+    dispatch(getUserProfile(props.match.params.employeeId))
+   }, [])
 
   function handleClickOpen() {
     setOpen(true);
@@ -146,25 +157,7 @@ export default function ViewProfile() {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-{/*       
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-        <Toolbar className={classes.toolbar}>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Seek and You Shall Find
-          </Typography>
-          <Button
-          variant="outlined" 
-          style={{background: 'white', color: 'black'}}
-          color="inherit" 
-          onClick={handleClickOpen}>
-            Account Options
-          </Button>
-          <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} />
-        </Toolbar>
-      </AppBar>
-       */}
+   
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
@@ -223,7 +216,5 @@ export default function ViewProfile() {
           </Grid>
         </Container>
       </main>
-        <div className={classes.appBarSpacer} />
-    </div>
   );
 }

@@ -13,5 +13,7 @@ namespace SeekersOfTalent.Domain
         UserProfileResponse GetUserProfile(Guid userId);
 
         List<UserProfileResponse> GetEmployeeProfileList(SearchParamsViewModel spr);
+
+        DocumentRequest GetDocumentByteById(Guid docId);
     }
 }

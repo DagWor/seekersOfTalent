@@ -10,14 +10,26 @@ import { UserSession } from "../../_view_model/session";
 const auth_service  = new AuthService()
 
 function requestLogin(message:string){
-  return {type:AuthActions.AUTH_REQUEST_LOADING,message}
+  return {type:AuthActions.LOGIN_REQUEST_LOADING,message}
 }
 function loginSuccess(session:UserSession){
-  return {type:AuthActions.AUTH_REQUEST_SUCCESS,session}
+  return {type:AuthActions.LOGIN_REQUEST_SUCCESS,session}
 }
 function loginError(message:string){
-  return {type:AuthActions.AUTH_REQUEST_ERROR,message}
+  return {type:AuthActions.LOGIN_REQUEST_ERROR,message}
 }
+
+
+function requestLogout(message:string){
+  return {type:AuthActions.LOGOUT_REQUEST_LOADING,message}
+}
+function logoutSuccess(){
+  return {type:AuthActions.LOGOUT_REQUEST_SUCCESS}
+}
+function logoutError(message:string){
+  return {type:AuthActions.LOGOUT_REQUEST_ERROR,message}
+}
+
 
 export const validateCredential: ActionCreator<ThunkAction<Promise<Action>, any, void, any>> = (data:LoginViewModel) => {
     return async (dispatch:any):Promise<Action> => {
@@ -54,4 +66,21 @@ export const checkSession: ActionCreator<ThunkAction<Promise<Action>, any, void,
           } 
         })
     }
+}
+
+export const destroySession: ActionCreator<ThunkAction<Promise<Action>, any, void, any>> = () => {
+  return async (dispatch:any):Promise<Action> => {
+    dispatch(requestLogout('Logging out, Please wait...'))
+    return auth_service.logoutUser()
+    .then(response=>{  
+      dispatch(logoutSuccess())  
+      return response.data;  
+    })
+    .catch(error=>
+      {
+        if(!axios.isCancel(error)){
+          dispatch(logoutError(error.message))
+        } 
+      })
+  }
 }

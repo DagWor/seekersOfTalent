@@ -35,7 +35,7 @@ namespace SeekersOfTalent.Api.Controllers
         {
             try
             {
-                _facade.SetSession(GetSession());
+                //        _facade.SetSession(GetSession());
                 return Ok(_facade.GetEmployeeProfileList(searchPrms));
 
             }

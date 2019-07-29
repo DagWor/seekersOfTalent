@@ -3,6 +3,7 @@ using SeekersOfTalent.Domain.Infrastructure;
 using SeekersOfTalent.Types.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SeekersOfTalent.Domain.Services
 {
@@ -62,7 +63,26 @@ namespace SeekersOfTalent.Domain.Services
 
         internal List<UserProfileResponse> GetEmployeeProfileList(SearchParamsViewModel searchParams)
         {
-            throw new NotImplementedException();
+            List<UserProfileResponse> response = new List<UserProfileResponse>();
+            var list = Context.UserInformation.Where(usr => usr.RoleId == (int)SeekersOfTalent.Types.Constants.RoleType.EMPLOYEE).ToList();
+            list.ForEach(ls => response.Add(GetUserProfileById(ls.Id)));
+
+            GetEmplMatchingExpertise(searchParams.LevelOfExpertise, response);
+
+            return response;
+        }
+
+        private List<UserProfileResponse> GetEmplMatchingExpertise(int lvlOfExp, List<UserProfileResponse> filteredList)
+        {
+            if (lvlOfExp == 0)
+                return filteredList;
+            var list = Context.EmployeeSkill.Where(empl => empl.ExpertiseLvlId == lvlOfExp).ToList();
+            filteredList.ForEach(fl =>
+            {
+                if (list.Find(empl => empl.EmployeeId == (Guid)fl.Id) == null)
+                    filteredList.Remove(fl);
+            });
+            return filteredList;
         }
 
         private void SaveTalentData(UserProfileRequest request, UserInformation user)

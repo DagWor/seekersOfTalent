@@ -8,12 +8,15 @@ import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
+import HomeIcon from '@material-ui/icons/Home';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button'
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { ApplicationState } from '../_state_model/application-state';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RoleType } from '../_enum/role-type';
+import { Link } from 'react-router-dom';
+import { destroySession } from '../_setup/actions/auth-actions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -83,7 +86,7 @@ export default function NavBar() {
   const classes = useStyles();
   const authState = useSelector( (appState:ApplicationState)=>appState.auth)
   
-
+  const dispatch = useDispatch()
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -120,10 +123,9 @@ export default function NavBar() {
       onClose={handleMenuClose}
     >
     <MenuItem onClick={handleMenuClose}>
-    <Button href='/view-profile'>My Profile</Button>
     </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-      <Button fullWidth={true} href='/register'>Logout</Button>
+        <Button fullWidth={true} onClick={()=>dispatch(destroySession())}>Logout</Button>
       </MenuItem>
     </Menu>
   );
@@ -145,12 +147,16 @@ export default function NavBar() {
       </MenuItem>
     </Menu>
   );
+  
 
   return (
     <Fragment>
       <AppBar position={'sticky'} color={'default'} >
         <Toolbar>
-          <Typography className={classes.title} variant="h4" noWrap>
+          <Link to={'/home'}>
+            <HomeIcon fontSize={'large'} />
+          </Link>
+          <Typography className={classes.title} style={{paddingLeft:'5px'}} variant="h5" noWrap>
             Talent fair
           </Typography>
           

@@ -11,6 +11,13 @@ import Button from '@material-ui/core/Button'
 import { ApplicationState } from '../../../../_state_model/application-state';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { UserProfileResponse } from '../../../../_view_model/user-information';
+import { documentUrl } from '../../../../_setup/services/document.url';
+
+
+interface IProps{
+  talent : UserProfileResponse  
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -38,17 +45,23 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function UserCard() {
+
+
+
+
+export default function UserCard(props: IProps) {
   const classes = useStyles();
   const authState = useSelector( (appState:ApplicationState)=>appState.auth )
   return (
     <Card className={classes.card} >
       <CardContent>
-      <CardMedia
+      {/* <CardMedia
         className={classes.media}
-        image={profile}
+        // image={profile}
+        image={`${baseUrl}Document/GetDocumentById/${props.talent.profilePicture.id}`}
         title="profile"
-      />
+      /> */}
+      <img src={`${documentUrl}${props.talent.profilePicture.id}`} alt="Profile Picture"/>
       <Typography variant={'h6'}>Dagmawi Werku</Typography>
         <Typography variant="body2" color="textSecondary" component="p">
           This is where the section where the bio of this particular talent
