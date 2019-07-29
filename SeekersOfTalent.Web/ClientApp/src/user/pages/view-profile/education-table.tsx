@@ -40,7 +40,7 @@ export default function EducationTable(props:IProps) {
 
   return (
     <Paper className={classes.root}>
-      <Table className={classes.table}>
+      <Table>
         <TableHead>
           <TableRow>
             <TableCell>Field of study</TableCell>

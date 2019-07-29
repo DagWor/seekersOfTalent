@@ -79,12 +79,11 @@ SimpleDialog.propTypes = {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-    backgroundColor: 'white'
+    display: 'flex',
   },
   header :{
     width: '100%',
-    height: '220px'
+    height: '200px'
   },
   avatar: {
     backgroundColor: blue[100],
@@ -133,6 +132,7 @@ const useStyles = makeStyles(theme => ({
   appBarSpacer: theme.mixins.toolbar,
   paper: {
     padding: theme.spacing(2),
+    marginTop: theme.spacing(2)
   },
   fixedHeight: {
     height: 240,
@@ -231,38 +231,22 @@ export default function ViewProfile(props : IProps) {
          <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         
-        <div className={classes.root} style={{margin: 'none'}}>
+        <div className={classes.root}>
             <AppBar position="static">
                 <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                <Tab label="Bio" {...a11yProps(0)} />
-                <Tab label="Skills" {...a11yProps(1)} />
-                <Tab label="Education" {...a11yProps(2)} />
-                <Tab label="Portfolio" {...a11yProps(3)} />
+                <Tab label="Item One" {...a11yProps(0)} />
+                <Tab label="Item Two" {...a11yProps(1)} />
+                <Tab label="Item Three" {...a11yProps(2)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-              <Typography align='center' component='h4' variant='h3'>
-                Bio
-              </Typography>
-                <Typography align='center' variant='subtitle2'>
-                  {prfl.profile.bio}
-                </Typography>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                Skills
                 <SkillTable skills={prfl.profile.skills}/>
             </TabPanel>
-            <TabPanel value={value} index={2}>
-              <Typography component='h4' align='center' variant='h3'>
-                Educational background
-              </Typography>
-              <EducationTable educationHistory={prfl.profile.educationHistory} />
+            <TabPanel value={value} index={1}>
+                Item Two
             </TabPanel>
-            <TabPanel value={value} index={3}>
-                <Typography align='center' component='h4' variant='h3'>
-                    Portfolio
-                </Typography>
-                  <PortfolieTable  portfolioHistory={prfl.profile.portfolio}/>
+            <TabPanel value={value} index={2}>
+                Item Three
             </TabPanel>
         </div>
       </main>

@@ -58,7 +58,7 @@ export default function UserCard(props: IProps) {
       <CardMedia
         className={classes.media}
         // image={profile}
-        image={`${documentUrl}${props.talent.profilePicture.id}`}
+        //image={`${documentUrl}${props.talent.profilePicture.id}`}
         title="profile"
       />
       <Typography variant={'h6'}>{props.talent.firstName+' '+props.talent.lastName}</Typography>
