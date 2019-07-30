@@ -138,22 +138,7 @@ export default function NavBar() {
   );
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <a href='/login'>Sign In</a>
-        <a href='/login'>Sign Up</a>
-      </MenuItem>
-    </Menu>
-  );
+  
 
   function handleSkillChange(event : any){
     const temSrchPrms : SearchParamsViewModel= searchParams
@@ -178,7 +163,7 @@ export default function NavBar() {
 
   return (
     <Fragment>
-      <AppBar position={'sticky'} color={'default'} >
+      <AppBar className={classes.grow} position={'sticky'} color={'default'} >
         <Toolbar>
           <Link to={'/home'}>
             <HomeIcon fontSize={'large'} />
@@ -268,7 +253,6 @@ export default function NavBar() {
           </div>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
       {renderMenu}
     </Fragment>
   );

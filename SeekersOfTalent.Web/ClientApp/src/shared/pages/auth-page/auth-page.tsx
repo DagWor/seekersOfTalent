@@ -30,10 +30,10 @@ export default function AuthPage() {
             {
                 !authState.authenticated &&
                 <Grid container spacing={0} >
-                    <Grid style={{marginTop:'10vh'}} item md={5}>
+                    <Grid style={{marginTop:'10vh'}} item md={5} xs={12}>
                         <Login/>
                     </Grid>
-                    <Grid item md={7} style={{marginTop:'10vh',borderLeftColor:'gray',borderLeftStyle:'solid',borderLeftWidth:'1px'}}>
+                    <Grid item md={7} xs={12} style={{marginTop:'10vh',borderLeftColor:'gray',borderLeftStyle:'solid',borderLeftWidth:'1px'}}>
                         {/* <SignUp/> */}
                         <RegistrationForm/>
                     </Grid>

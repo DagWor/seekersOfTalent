@@ -118,7 +118,7 @@ export default function RegistrationForm(props: IProps) {
                 <Grid container justify={'flex-start'}>
                     <Grid item xs={12}>
                         <Grid container spacing={2} justify={'flex-start'}>
-                        <Grid item md={6}>
+                        <Grid item md={6} xs={12}>
                             <TextField
                                 required
                                 fullWidth
@@ -128,7 +128,7 @@ export default function RegistrationForm(props: IProps) {
                                 onChange={(event)=>setUserData({...userData,firstName:event.target.value})}
                             />
                         </Grid>
-                        <Grid item md={6}>
+                        <Grid item md={6} xs={6}>
                             <TextField
                                 required
                                 fullWidth
@@ -138,7 +138,7 @@ export default function RegistrationForm(props: IProps) {
                                 onChange={(event)=>setUserData({...userData,lastName:event.target.value})}
                             />
                         </Grid>
-                        <Grid item md={12}>
+                        <Grid item md={12} xs={12}>
                             <TextField
                                 required
                                 fullWidth
@@ -150,7 +150,7 @@ export default function RegistrationForm(props: IProps) {
                         </Grid>
                             {
                                 !authState.authenticated &&
-                                <Grid item md={12}>
+                                <Grid item md={12} xs={12}>
                                     <TextField
                                         required
                                         fullWidth
@@ -164,7 +164,7 @@ export default function RegistrationForm(props: IProps) {
                             }
                             {
                                 !authState.authenticated &&
-                                <Grid item md={12}>
+                                <Grid item md={12} xs={12}>
                                     <TextField
                                         required
                                         fullWidth
@@ -175,7 +175,7 @@ export default function RegistrationForm(props: IProps) {
                                     />
                                 </Grid>
                             }
-                        <Grid item md={12}>
+                        <Grid item md={12} xs={12}>
                             <TextField
                                 required
                                 fullWidth
@@ -185,7 +185,7 @@ export default function RegistrationForm(props: IProps) {
                                 onChange={(event)=>setUserData({...userData,phoneNumber:event.target.value})}
                             />
                         </Grid>
-                        <Grid item md={12}>
+                        <Grid item md={12} xs={12}>
                             <TextField
                                 required
                                 defaultValue="2017-05-24"
@@ -200,7 +200,7 @@ export default function RegistrationForm(props: IProps) {
 
                             {
                                 !authState.authenticated &&
-                        <Grid item md={12}>
+                        <Grid item md={12} xs={12}>
                             <RadioGroup
                                         aria-label={'Role'}
                                         value={userData.role+''}
@@ -217,7 +217,7 @@ export default function RegistrationForm(props: IProps) {
                        }
 
                        <div style={{height: userData.role == RoleType.EMPLOYEE? 'auto' : '0px',width:'100%',overflow:'hidden'}}>
-                        <Grid item md={12}>
+                        <Grid item xs={12} md={12}>
                             <TextField
                                 fullWidth
                                 multiline
@@ -232,10 +232,10 @@ export default function RegistrationForm(props: IProps) {
                             userData.profilePicture.fileName.trim().length>0 &&
                             profilePicture(userData.profilePicture)  
                         }
-                            <Grid item xs={12}>
+                            <Grid item md={12} xs={12}>
                              <input id={PROFILE_ID} type="file" style={{visibility:'hidden'}} onChange={()=>handleFileChange(PROFILE_ID)}/>
                             </Grid>
-                            <Grid item xs={12}>
+                            <Grid item md={12} xs={12}>
                                 <Button style={{borderRadius:'2px'}} onClick={()=>{
                                     let prflInput = (document.getElementById(PROFILE_ID) as HTMLInputElement);
                                     prflInput.click()
@@ -247,7 +247,7 @@ export default function RegistrationForm(props: IProps) {
                             userData.otherDocs.map(fileRow)  
                         }
                             <input style={{visibility:'hidden'}} id={OTHER_DOCS_ID} type="file" onChange={()=>handleFileChange(OTHER_DOCS_ID)}/>
-                            <Grid item xs={12}>
+                            <Grid item md={12} xs={12}>
                                 <Button style={{borderRadius:'2px'}} onClick={()=>{
                                     let prflInput = (document.getElementById(OTHER_DOCS_ID) as HTMLInputElement);
                                     prflInput.click()
@@ -255,7 +255,7 @@ export default function RegistrationForm(props: IProps) {
                                     Add Training & Certificate documents
                                 </Button>
                             </Grid>
-                            <Grid xs={12}>
+                            <Grid item xs={12} md={12}>
                             <TabFormFields
                                 userData={userData}
                                 changeBinder={setUserData}
@@ -264,7 +264,7 @@ export default function RegistrationForm(props: IProps) {
 
                        </div>
 
-                        <Grid item md={12}>
+                        <Grid item md={12} xs={12}>
                             <Button style={{borderRadius:'2px'}} onClick={submitData} fullWidth variant={'outlined'}>
                                 submit
                             </Button>
