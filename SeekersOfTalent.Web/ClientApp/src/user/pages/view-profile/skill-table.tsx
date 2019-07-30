@@ -37,7 +37,7 @@ export default function SkillTable(props:IProps) {
   const classes = useStyles();
   return (
     <Paper className={classes.root}>
-      <Table className={classes.table}>
+      <Table>
         <TableHead>
           <TableRow>
             <TableCell>Skill Type</TableCell>
