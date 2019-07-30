@@ -130,6 +130,7 @@ namespace SeekersOfTalent.Domain.Services
 
                 SkillType skill = new SkillType
                 {
+                    Id = new Random().Next(90000000),
                     Name = skl.Name,
                     Description = skl.Description
                 };

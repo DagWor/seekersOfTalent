@@ -64,8 +64,8 @@ namespace SeekersOfTalent.Domain.Infrastructure
                     Description = eSkl.Skill.Description,
                     LevelOfExpertise = new Expertise
                     {
-                        Id = eSkl.ExpertiseLvl.Id,
-                        Name = eSkl.ExpertiseLvl.Name
+                        Id = Context.ExpertiseLvlType.Find(eSkl.ExpertiseLvlId).Id,
+                        Name = Context.ExpertiseLvlType.Find(eSkl.ExpertiseLvlId)?.Name
                     }
                 });
             });
