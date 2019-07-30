@@ -26,6 +26,7 @@ function TabFormFields(props : IProps) {
     <Fragment>
       {/* <AppBar position="static"  color="default"> */}
         <Tabs
+            style={{flexGrow: 1}}
             value={value}
             onChange={handleChange}
             indicatorColor="primary"
@@ -34,8 +35,8 @@ function TabFormFields(props : IProps) {
         >
           <Tab label="Skill" />
           <Tab label="Education" />
-          <Tab label="Employment" />
-          <Tab label="POrtfoleo" />
+          <Tab label="Jobs" />
+          <Tab label="Profile" />
         </Tabs>
       {/* </AppBar> */}
         {value == 0 && <SkillForm userData={props.userData} changeBinder={props.changeBinder} />}

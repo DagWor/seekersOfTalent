@@ -118,7 +118,7 @@ export default function RegistrationForm(props: IProps) {
                 <Grid container justify={'flex-start'}>
                     <Grid item xs={12}>
                         <Grid container spacing={2} justify={'flex-start'}>
-                        <Grid item md={6} xs={12}>
+                        <Grid item md={6} xs={6}>
                             <TextField
                                 required
                                 fullWidth
@@ -228,6 +228,7 @@ export default function RegistrationForm(props: IProps) {
                                 onChange={(event)=>setUserData({...userData,bio:event.target.value})}
                             />
                         </Grid>
+                        <Grid item xs={12}>
                         {
                             userData.profilePicture.fileName.trim().length>0 &&
                             profilePicture(userData.profilePicture)  
@@ -260,8 +261,8 @@ export default function RegistrationForm(props: IProps) {
                                 userData={userData}
                                 changeBinder={setUserData}
                             />
+                            </Grid>
                         </Grid>
-
                        </div>
 
                         <Grid item md={12} xs={12}>
