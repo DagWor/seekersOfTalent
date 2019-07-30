@@ -5,6 +5,7 @@ import AuthService from './../services/auth.service'
 import { LoginViewModel } from "../../_view_model/login-view-model";
 import { AuthActions } from "./actionTypes";
 import { UserSession } from "../../_view_model/session";
+import {closeModal, errorModal, loadingModal} from "./loading-modal-actions";
 
 
 const auth_service  = new AuthService()
@@ -33,17 +34,18 @@ function logoutError(message:string){
 
 export const validateCredential: ActionCreator<ThunkAction<Promise<Action>, any, void, any>> = (data:LoginViewModel) => {
     return async (dispatch:any):Promise<Action> => {
-      dispatch(requestLogin('Validating credential, Please wait...'))
+      dispatch(loadingModal('Validating Credential, Please wait...'))
       return auth_service.validateCredention(data)
       .then(response=>{  
-        dispatch(loginSuccess(response.data))  
-        return response.data;  
-
+        dispatch(loginSuccess(response.data))
+        dispatch(closeModal())
+        return response.data;
       })
       .catch(error=>
         {
           if(!axios.isCancel(error)){
-            dispatch(loginError(error.message))
+              dispatch(errorModal('Invalid Credential'))
+              dispatch(loginError(error.message))
           } 
         })
     }
@@ -51,10 +53,11 @@ export const validateCredential: ActionCreator<ThunkAction<Promise<Action>, any,
 
 export const checkSession: ActionCreator<ThunkAction<Promise<Action>, any, void, any>> = () => {
     return async (dispatch:any):Promise<Action> => {
+        dispatch(loadingModal('Checking For Previous Session, Please wait...'))
       dispatch(requestLogin('Validating session, Please wait...'))
       return auth_service.checkSessionValidity()
-      .then(response=>{  
-        console.log('Valid Session',response.data)
+      .then(response=>{
+        dispatch(closeModal())
         dispatch(loginSuccess(response.data))  
         return response.data;  
 
@@ -62,7 +65,8 @@ export const checkSession: ActionCreator<ThunkAction<Promise<Action>, any, void,
       .catch(error=>
         {
           if(!axios.isCancel(error)){
-            dispatch(loginError(error.message))
+              dispatch(closeModal())
+              dispatch(loginError(error.message))
           } 
         })
     }

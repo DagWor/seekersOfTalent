@@ -4,6 +4,7 @@ import AppRouter from '../configs/app-router';
 import { checkSession } from '../../_setup/actions/auth-actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../_state_model/application-state';
+import LoadingModal from "../../shared/loading/loading-modal";
 
 export default function AppLayout() {
     
@@ -16,6 +17,7 @@ export default function AppLayout() {
     return (
         <Fragment>
             <NavBar/>
+            <LoadingModal/>
             {
                 appState.loading &&
                 <p>Loading ... </p>

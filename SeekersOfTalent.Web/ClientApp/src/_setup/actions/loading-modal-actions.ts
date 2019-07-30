@@ -1,14 +1,14 @@
 import {LoadingModalActions} from './actionTypes'
 
-export function loading(loadingMessage : string){
+export function loadingModal(loadingMessage : string){
     return {type : LoadingModalActions.LOADING,loadingMessage}
 }
 
-export function error(errorMessage : string){
+export function errorModal(errorMessage : string){
     return {type:LoadingModalActions.ERROR,errorMessage}
 }
 
-export function success(successMessage: string){
+export function successModal(successMessage: string){
     return {type:LoadingModalActions.SUCCESS,successMessage}
 }
 

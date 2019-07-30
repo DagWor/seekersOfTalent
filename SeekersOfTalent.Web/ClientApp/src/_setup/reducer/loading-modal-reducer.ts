@@ -3,7 +3,7 @@ import { LoadingModalState } from '../../_state_model/loading-modal-state';
 import { LoadingModalActions } from '../actions/actionTypes';
 let initialState : LoadingModalState={
     open:false,
-    loading:false,
+    loading:true,
     error:false,
     loadingMessage:undefined,
     errorMessage:undefined,

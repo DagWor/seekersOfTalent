@@ -19,3 +19,8 @@
 /SeekersOfTalent.Types/obj
 /.vs/seekersOfTalent/DesignTimeBuild
 /SeekersOfTalent.Data/Scafold.txt
+/SeekersOfTalent.Api/bin/Release/netcoreapp2.2
+/SeekersOfTalent.Api/Properties/PublishProfiles
+/SeekersOfTalent.Data/bin/Release/netcoreapp2.2
+/SeekersOfTalent.Domain/bin/Release/netcoreapp2.2
+/SeekersOfTalent.Types/bin/Release/netcoreapp2.2
