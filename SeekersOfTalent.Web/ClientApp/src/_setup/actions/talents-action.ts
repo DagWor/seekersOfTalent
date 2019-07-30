@@ -26,11 +26,11 @@ function tlntLstReqError(message:string){
 export const fetchTalentList: ActionCreator<ThunkAction<Promise<Action>, any, void, any>> = (data:SearchParamsViewModel) => {
     return async (dispatch:any):Promise<Action> => {
       console.log('[Action ] fetching talents')
+      console.log('[Search Params ]',data)
       dispatch(requestTalentList('fetching talents, Please wait...'))
       return talent_service.fetchTalentList(data)
       .then(response=>{  
-        console.log('TALENTS LIST : ',response)
-        dispatch(tlntLstReqSuccess(response.data))  
+        dispatch(tlntLstReqSuccess(response.data))
         return response.data;  
       })
       .catch(error=>

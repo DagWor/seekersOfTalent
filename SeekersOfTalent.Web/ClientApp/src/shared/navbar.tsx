@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, {Fragment, useState} from 'react';
 import { fade, makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,6 +17,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RoleType } from '../_enum/role-type';
 import { Link } from 'react-router-dom';
 import { destroySession } from '../_setup/actions/auth-actions';
+import {SearchParamsViewModel} from "../_view_model/search-params";
+import {Grid} from "@material-ui/core";
+import FormControl from "@material-ui/core/FormControl/FormControl";
+import Select from "@material-ui/core/Select/Select";
+import FormHelperText from "@material-ui/core/FormHelperText/FormHelperText";
+import TextField from "@material-ui/core/TextField/TextField";
+import {fetchTalentList} from "../_setup/actions/talents-action";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,33 +35,24 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     title: {
       display: 'none',
+        width:'20%',
       [theme.breakpoints.up('sm')]: {
         display: 'block',
       },
     },
     search: {
-      position: 'relative',
-      borderRadius: theme.shape.borderRadius,
+/*      position: 'relative',*/
+      /*borderRadius: theme.shape.borderRadius,
       backgroundColor: fade(theme.palette.common.white, 0.15),
       '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25),
-      },
-      marginRight: theme.spacing(2),
-      marginLeft: 0,
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(3),
-        width: 'auto',
-      },
-    },
-    searchIcon: {
-      width: theme.spacing(7),
-      height: '100%',
-      position: 'absolute',
-      pointerEvents: 'none',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      },*/
+      marginRight: 0,
+      width: '100%'
+      /*[theme.breakpoints.up('sm')]: {
+        marginLeft: theme.spacing(15),
+        width: '100%',*/
+      //},
     },
     inputRoot: {
       color: 'inherit',
@@ -82,10 +80,19 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const initSearchParams : SearchParamsViewModel = {
+    levelOfExpertise: 0,
+    typeOfSkill: '',
+    studyField: ''
+}
+
+
 export default function NavBar() {
   const classes = useStyles();
   const authState = useSelector( (appState:ApplicationState)=>appState.auth)
-  
+
+  const [searchParams,setSearchParams] = useState(initSearchParams)
+
   const dispatch = useDispatch()
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -147,7 +154,27 @@ export default function NavBar() {
       </MenuItem>
     </Menu>
   );
-  
+
+  function handleSkillChange(event : any){
+    const temSrchPrms : SearchParamsViewModel= searchParams
+    temSrchPrms.typeOfSkill = event.target.value
+    updateSync(temSrchPrms as SearchParamsViewModel)
+  }
+  function handleStudyChange(event : any){
+      const temSrchPrms : SearchParamsViewModel= searchParams
+      temSrchPrms.studyField = event.target.value
+      updateSync(temSrchPrms as SearchParamsViewModel)
+  }
+  function handleExpertyChange(event : any){
+      const temSrchPrms : SearchParamsViewModel= searchParams
+      temSrchPrms.levelOfExpertise = event.target.value
+      updateSync(temSrchPrms as SearchParamsViewModel)
+  }
+
+  async function updateSync(newParams : SearchParamsViewModel){
+    await setSearchParams({...newParams})
+    dispatch(fetchTalentList(searchParams))
+  }
 
   return (
     <Fragment>
@@ -165,17 +192,43 @@ export default function NavBar() {
             authState.session != null &&
             authState.session.role === RoleType.EMPLOYER &&
             <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'Search' }}
-              />
+              <Grid container spacing={2}>
+                  <Grid item xs={12} md={4}>
+                      <FormControl fullWidth>
+                          <Select
+                              value={searchParams.levelOfExpertise}
+                              style={{height:'48px'}}
+                              name={'levelOfExpertise'}
+                              onChange={handleExpertyChange}
+
+                          >
+                              <MenuItem value={0}>All</MenuItem>
+                              <MenuItem value={1}>Moderate</MenuItem>
+                              <MenuItem value={2}>High</MenuItem>
+                              <MenuItem value={3}>Expert</MenuItem>
+                          </Select>
+                      </FormControl>
+                  </Grid>
+                <Grid item md={4}>
+                    <TextField
+                        fullWidth
+                        label="Skill"
+                        name={'typeOfSkill'}
+                        value={searchParams.typeOfSkill}
+                        onChange={handleSkillChange}
+                    />
+                </Grid>
+                <Grid item md={4}>
+                    <TextField
+                        fullWidth
+                        label="Field Of Study"
+                        name={'studyField'}
+                        value={searchParams.studyField}
+                        onChange={handleStudyChange}
+
+                    />
+                </Grid>
+              </Grid>
             </div>
           }
           

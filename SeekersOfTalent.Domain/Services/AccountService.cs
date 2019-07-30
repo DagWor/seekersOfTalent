@@ -68,7 +68,8 @@ namespace SeekersOfTalent.Domain.Services
             list.ForEach(ls => response.Add(GetUserProfileById(ls.Id)));
 
             GetEmplMatchingExpertise(searchParams.LevelOfExpertise, response);
-
+            GetEmplMatchingSkillType(searchParams.TypeOfSkill, response);
+            GetEmplMatchingFieldOfStudy(searchParams.StudyField, response);
             return response;
         }
 
@@ -77,13 +78,41 @@ namespace SeekersOfTalent.Domain.Services
             if (lvlOfExp == 0)
                 return filteredList;
             var list = Context.EmployeeSkill.Where(empl => empl.ExpertiseLvlId == lvlOfExp).ToList();
-            filteredList.ForEach(fl =>
+            for (int i = 0; i < filteredList.Count; i++)
             {
-                if (list.Find(empl => empl.EmployeeId == (Guid)fl.Id) == null)
-                    filteredList.Remove(fl);
-            });
+                if (list.Find(empl => empl.EmployeeId == (Guid)filteredList[i].Id) == null)
+                    filteredList.Remove(filteredList[i]);
+            }
             return filteredList;
         }
+        private List<UserProfileResponse> GetEmplMatchingSkillType(string skillType, List<UserProfileResponse> filteredList)
+        {
+            if (skillType == "")
+                return filteredList;
+
+            var list = Context.EmployeeSkill.Where(empl => empl.Skill.Name == skillType).ToList();
+            for (int i = 0; i < filteredList.Count; i++)
+            {
+                if (list.Find(empl => empl.EmployeeId == (Guid)filteredList[i].Id) == null)
+                    filteredList.Remove(filteredList[i]);
+            }
+            return filteredList;
+        }
+        private List<UserProfileResponse> GetEmplMatchingFieldOfStudy(string field, List<UserProfileResponse> filteredList)
+        {
+            if (field == "")
+                return filteredList;
+            var list = Context.EducationHistory.Where(empl => empl.Field.Equals(field)).ToList();
+            for (int i = 0; i < filteredList.Count; i++)
+            {
+                if (list.Find(empl => empl.EmployeeId == (Guid)filteredList[i].Id) == null)
+                    filteredList.Remove(filteredList[i]);
+            }
+            return filteredList;
+        }
+
+
+
 
         private void SaveTalentData(UserProfileRequest request, UserInformation user)
         {
@@ -98,11 +127,20 @@ namespace SeekersOfTalent.Domain.Services
 
             request.Skills.ForEach(skl =>
             {
+
+                SkillType skill = new SkillType
+                {
+                    Name = skl.Name,
+                    Description = skl.Description
+                };
+                Context.SkillType.Add(skill);
+                Context.SaveChanges();
+
                 Context.EmployeeSkill.Add(new EmployeeSkill
                 {
                     EmployeeId = user.Id,
                     ExpertiseLvlId = skl.LevelOfExpertise.Id,
-                    SkillId = skl.Id
+                    SkillId = skill.Id
                 });
                 Context.SaveChanges();
             });
@@ -137,7 +175,6 @@ namespace SeekersOfTalent.Domain.Services
                     StartDate = eds.StartDate,
                     EmployeeId = user.Id,
                     Field = eds.FieldOfStudy
-
                 });
                 Context.SaveChanges();
             });

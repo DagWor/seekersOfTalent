@@ -1,8 +1,8 @@
-import React, { useEffect, Fragment } from 'react';
+import React, {Fragment, useEffect} from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container'; 
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import profile from './profile.png'
@@ -16,13 +16,15 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
-import { blue } from '@material-ui/core/colors';
+import {blue} from '@material-ui/core/colors';
 import SkillTable from '../view-profile/skill-table'
 import ExperienceTable from './education-table'
-import { useSelector,  useDispatch } from 'react-redux';
-import { ApplicationState } from '../../../_state_model/application-state';
+import {useDispatch, useSelector} from 'react-redux';
+import {ApplicationState} from '../../../_state_model/application-state';
 import {getUserProfile} from './../../../_setup/actions/profile-actions'
 import PortfolieTable from './portfoli-table'
+import {RoleType} from '../../../_enum/role-type';
+import RegistrationFormModal from "../../../shared/pages/register/register-form-modal";
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -140,9 +142,22 @@ export default function ViewProfile(props : IProps) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(options[1]);
 
+  const [openForm, setOpenForm] = React.useState(false);
+
+  function handleFormClickOpen() {
+    setOpenForm(true);
+  }
+
+  function handleCloseForm() {
+    setOpenForm(false);
+  }
+
+
   const dispatch = useDispatch()
   const prfl = useSelector( (appState : ApplicationState)=>appState.profile)
-  useEffect(() => {
+  const authState = useSelector( (appState : ApplicationState)=>appState.auth)
+
+    useEffect(() => {
     dispatch(getUserProfile(props.match.params.employeeId))
    }, [])
 
@@ -160,7 +175,6 @@ export default function ViewProfile(props : IProps) {
 
   return (
    <Fragment>
-
      {
        prfl.loading &&
        <p>Loading talent Information</p>
@@ -181,6 +195,11 @@ export default function ViewProfile(props : IProps) {
             {/* Basics */}
             <Grid item xs={12} md={4} lg={3}>
                 <img  src={profile} className={fixedHeightPaper} alt={'Loading'}/>
+                {
+                  authState.session != null &&
+                  authState.session.role == RoleType.EMPLOYEE &&
+                  <RegistrationFormModal open={openForm} userdata={prfl.profile} handleClickOpen={handleFormClickOpen} handleClose={handleCloseForm} />
+                }
             </Grid>
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper} style={{textAlign: 'center', backgroundColor: '#9e9e9e', paddingTop: 50}}>

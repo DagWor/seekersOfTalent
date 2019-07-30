@@ -7,5 +7,5 @@ export interface PortfolioViewModel {
 export interface Project {
     name: string;
     description: string;
-    links: string[];
+    links: string;
 }

@@ -6,7 +6,6 @@ import LandingPage from '../../shared/pages/landing/landing'
 import Register from '../../shared/pages/register/register'
 import ViewProfile from './../../user/pages/view-profile/view-profile'
 import BuildProfile from '../../user/pages/build-profile/build-profile'
-import RecruiterRegister from '../../recruiter/pages/register/recruiter-register'
 import { useSelector } from "react-redux";
 import { ApplicationState } from "../../_state_model/application-state";
 import NotFound from './../../shared/pages/not-found/not-found'
@@ -36,7 +35,7 @@ function AppRouter() {
           appState.session.role == RoleType.EMPLOYER &&
           <Fragment>
             <Route path="/home" component={LandingPage} />
-            <Route path="/view-profile/{employeeId}" component={ViewProfile} />
+            <Route path="/view-profile/:employeeId" component={ViewProfile} />
             <Redirect  from ={`/`} to={`/home`}/>
           </Fragment>
         }

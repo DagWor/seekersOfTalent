@@ -57,33 +57,22 @@ export default function LandingPage() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('[Effect ] : Loading Talents')
     dispatch(fetchTalentList(searchParams))
   }, [])
 
-  console.log('Authentication State',authState)
   return (
     <div style={{flexGrow: '-moz-initial'}}>
       <main>
-        <div className={classes.heroContent}>
-          <Container maxWidth="sm">
-            
-            {
-
-            }
-            
-
             {
               !authState.authenticated &&
-              <Fragment>
+              <div className={classes.heroContent}>
+              <Container maxWidth="sm">    
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                   TalentFair
                 </Typography>
                 <Typography variant="h5" align="center" color="textSecondary" paragraph>
                   Browsing for Talent or Looking for Recruiters on the Market?
                 </Typography>
-                
-                
                 <div className={classes.heroButtons}>
                   <Grid container spacing={2} justify="center">
                     <Grid item xs={6}>
@@ -94,12 +83,11 @@ export default function LandingPage() {
                       </Link>
                     </Grid>
                   </Grid>
-                </div>
-              </Fragment>
+                </div>            
+              </Container>
+              </div>
             }
             
-          </Container>
-        </div>
         <br />
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}

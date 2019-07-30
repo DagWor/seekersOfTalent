@@ -55,12 +55,24 @@ export default function UserCard(props: IProps) {
   return (
     <Card className={classes.card} >
       <CardContent>
-      <CardMedia
-        className={classes.media}
-        // image={profile}
-        image={`${documentUrl}${props.talent.profilePicture.id}`}
-        title="profile"
-      />
+      {
+        props.talent.profilePicture == undefined &&
+        <CardMedia
+          className={classes.media}
+          image={profile}
+          title="profile"
+        />
+      
+      }
+      {
+        props.talent.profilePicture != undefined &&
+        <CardMedia
+            className={classes.media}
+            image={`${documentUrl}${props.talent.profilePicture.id}`}
+            title="profile"
+          />
+      }
+      
       <Typography variant={'h6'}>{props.talent.firstName+' '+props.talent.lastName}</Typography>
         <Typography variant="body2" color="textSecondary" component="p">
            {props.talent.bio}
