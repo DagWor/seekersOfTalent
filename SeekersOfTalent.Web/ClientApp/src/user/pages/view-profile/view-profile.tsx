@@ -108,6 +108,10 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
   },
+  image: {
+    maxWidth: '200px',
+    maxHeight: '200px'
+  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['width', 'margin'], {
@@ -153,6 +157,7 @@ function TabPanel(props: TabPanelProps) {
   
     return (
       <Typography
+      color='primary'
         component="div"
         role="tabpanel"
         hidden={value !== index}
@@ -232,14 +237,22 @@ export default function ViewProfile(props : IProps) {
         <div className={classes.appBarSpacer} />
         
         <div className={classes.root} style={{margin: 'none'}}>
-            <AppBar position="static">
-                <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-                <Tab label="Bio" {...a11yProps(0)} />
-                <Tab label="Skills" {...a11yProps(1)} />
-                <Tab label="Education" {...a11yProps(2)} />
-                <Tab label="Portfolio" {...a11yProps(3)} />
+            {/* <AppBar position="static"> */}
+                <Tabs 
+                  value={value} 
+                  variant='fullWidth' 
+                  textColor='primary' 
+                  indicatorColor='primary' 
+                  onChange={handleChange} 
+                  aria-label="simple tabs example"
+                  >
+                    <Tab label="Bio" {...a11yProps(0)} />
+                    <Tab label="Skills" {...a11yProps(1)} />
+                    <Tab label="Education" {...a11yProps(2)} />
+                    <Tab label="Profile" {...a11yProps(3)} />
+                    <Tab label="About" {...a11yProps(4)} />
                 </Tabs>
-            </AppBar>
+            {/* </AppBar> */}
             <TabPanel value={value} index={0}>
               <Typography align='center' component='h4' variant='h3'>
                 Bio
@@ -249,7 +262,9 @@ export default function ViewProfile(props : IProps) {
                 </Typography>
             </TabPanel>
             <TabPanel value={value} index={1}>
+              <Typography align='center' component='h4' variant='h3'>
                 Skills
+              </Typography>
                 <SkillTable skills={prfl.profile.skills}/>
             </TabPanel>
             <TabPanel value={value} index={2}>
@@ -263,6 +278,24 @@ export default function ViewProfile(props : IProps) {
                     Portfolio
                 </Typography>
                   <PortfolieTable  portfolioHistory={prfl.profile.portfolio}/>
+            </TabPanel>
+            <TabPanel value={value} index={4}>
+              <div style={{backgroundImage: `url(${profile})`, backgroundSize: 'cover'}}>
+                <Typography align='center' component='h4' variant='h3'>
+                    About Me
+                </Typography>
+                  <Typography align='center' style={{paddingTop: '4%'}}>
+                  <img style={{maxWidth: '300px'}} src={profile}/>
+                </Typography>
+                <Typography align='center' style={{paddingTop:'4%'}}>
+                  {prfl.profile.email}
+                </Typography>
+                <Typography align='center'>
+                  {prfl.profile.phoneNumber}
+                </Typography>
+              </div>
+                
+                
             </TabPanel>
         </div>
       </main>
