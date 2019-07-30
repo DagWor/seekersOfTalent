@@ -30,6 +30,7 @@ import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import RegistrationFormModal from "../../../shared/pages/register/register-form-modal";
 import {RoleType} from "../../../_enum/role-type";
+import {documentUrl} from "../../../_setup/services/document.url";
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -304,7 +305,21 @@ export default function ViewProfile(props : IProps) {
                     About Me
                 </Typography>
                   <Typography align='center' style={{paddingTop: '4%'}}>
-                  <img style={{maxWidth: '300px'}} src={profile}/>
+                      {
+                        !prfl.loading &&
+                        !prfl.error &&
+                         prfl.profile.profilePicture.id != undefined &&
+                        <img style={{maxWidth: '300px'}} src={documentUrl+prfl.profile.profilePicture.id}/>
+                      }
+                      {
+                          prfl.loading &&
+                          <img style={{maxWidth: '300px'}} src={profile}/>
+                      }
+                      {
+                          !prfl.loading &&
+                          prfl.profile.profilePicture.id == undefined &&
+                          <img style={{maxWidth: '300px'}} src={profile}/>
+                      }
                 </Typography>
                 <Typography align='center' style={{paddingTop:'4%'}}>
                   {prfl.profile.email}

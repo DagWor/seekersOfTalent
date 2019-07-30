@@ -43,10 +43,9 @@ export default function PortfolieTable(props:IProps) {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Field of study</TableCell>
             <TableCell align="justify">Project name</TableCell>
-            <TableCell align="right">Project Description</TableCell>
-            <TableCell align="right">Links</TableCell>
+            <TableCell align="justify">Project Description</TableCell>
+            <TableCell align="justify">Links</TableCell>
           </TableRow>
         </TableHead>
         
