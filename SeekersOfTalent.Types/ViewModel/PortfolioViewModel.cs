@@ -17,6 +17,6 @@ namespace SeekersOfTalent.Types.ViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<string> Links { get; set; }
+        public string Links { get; set; }
     }
 }

@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import { TransitionProps } from '@material-ui/core/transitions';
+import Grid from "@material-ui/core/Grid/Grid";
 
 
 interface IProps{
@@ -41,9 +42,13 @@ function RegistrationFormModal(props:IProps) {
     const classes = useStyles();
     return (
         <div>
-            <Button variant="outlined" color="primary" onClick={props.handleClickOpen}>
-                Edit Profile
-            </Button>
+            <Grid container justify={'center'}>
+                <Grid item xs={10} md={5} lg={2}>
+                    <Button variant="outlined" color="primary" fullWidth onClick={props.handleClickOpen}>
+                        Edit Profile
+                    </Button>
+                </Grid>
+            </Grid>
             <Dialog fullScreen open={props.open} onClose={props.handleClose} TransitionComponent={Transition}>
                 <AppBar color={'default'} className={classes.appBar}>
                     <Toolbar>

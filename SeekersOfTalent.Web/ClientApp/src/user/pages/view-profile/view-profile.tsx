@@ -28,6 +28,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
+import RegistrationFormModal from "../../../shared/pages/register/register-form-modal";
+import {RoleType} from "../../../_enum/role-type";
 
 export interface SimpleDialogProps {
   open: boolean;
@@ -84,7 +86,7 @@ const useStyles = makeStyles(theme => ({
   },
   header :{
     width: '100%',
-    height: '220px'
+    height: '250px'
   },
   avatar: {
     backgroundColor: blue[100],
@@ -179,8 +181,16 @@ function a11yProps(index: any) {
 export default function ViewProfile(props : IProps) {
   const [open, setOpen] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState(options[1]);
-
+  const [openForm, setOpenForm] = React.useState(false);
   const [value, setValue] = React.useState(0);
+
+    function handleFormClickOpen() {
+        setOpenForm(true);
+    }
+
+    function handleCloseForm() {
+        setOpenForm(false);
+    }
 
   function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
     setValue(newValue);
@@ -188,6 +198,7 @@ export default function ViewProfile(props : IProps) {
 
   const dispatch = useDispatch()
   const prfl = useSelector( (appState : ApplicationState)=>appState.profile)
+  const authState = useSelector((appState:ApplicationState)=>appState.auth)
   useEffect(() => {
     dispatch(getUserProfile(props.match.params.employeeId))
    }, [])
@@ -231,6 +242,14 @@ export default function ViewProfile(props : IProps) {
             <Typography variant="body2" align='center' gutterBottom style={{color: 'black'}}>
                 {prfl.profile.phoneNumber}
             </Typography>
+
+             {
+                 authState.session != null &&
+                 authState.session.role == RoleType.EMPLOYEE &&
+                 <RegistrationFormModal open={openForm} userdata={prfl.profile}
+                                        handleClickOpen={handleFormClickOpen}
+                                        handleClose={handleCloseForm}/>
+             }
 
           </div>
          <main className={classes.content}>
