@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="48e54030-3dc5-4f2f-87c4-8b8b8b794bb0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/shared/pages/register/register-form-modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/shared/pages/register/register-form-modal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/user/pages/view-profile/view-profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/user/pages/view-profile/view-profile.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="48e54030-3dc5-4f2f-87c4-8b8b8b794bb0" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -32,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/src/shared/pages/register/register-form-modal.tsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="318">
-              <caret line="37" column="57" lean-forward="true" selection-start-line="37" selection-start-column="57" selection-end-line="37" selection-end-column="57" />
+              <caret line="37" column="57" selection-start-line="37" selection-start-column="57" selection-end-line="37" selection-end-column="57" />
               <folding>
                 <element signature="e#1579#2341#0" />
               </folding>
@@ -165,12 +162,12 @@
       <option name="presentableId" value="Default" />
       <updated>1564420788853</updated>
       <workItem from="1564420797100" duration="17915000" />
-      <workItem from="1564462104907" duration="6191000" />
+      <workItem from="1564462104907" duration="7400000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24106000" />
+    <option name="totallyTimeSpent" value="25315000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -387,7 +384,7 @@
     <entry file="file://$PROJECT_DIR$/src/shared/pages/register/register-form-modal.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="318">
-          <caret line="37" column="57" lean-forward="true" selection-start-line="37" selection-start-column="57" selection-end-line="37" selection-end-column="57" />
+          <caret line="37" column="57" selection-start-line="37" selection-start-column="57" selection-end-line="37" selection-end-column="57" />
           <folding>
             <element signature="e#1579#2341#0" />
           </folding>
